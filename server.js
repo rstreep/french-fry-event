@@ -44,7 +44,7 @@ const sess = {
       db: sequelize                 // Database connection for session persistence
     }),
       // Set the default value of 'logIn' to false
-  logIn: false,
+      logged_in: false,
   };
   
   app.use(session(sess));           // Enable session middleware for the application
