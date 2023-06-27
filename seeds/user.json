@@ -1,0 +1,23 @@
+[
+    {
+      "firstname": "John",
+      "lastname": "Doe",
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "password": "123456",
+      "allergy_lookupid": null,
+      "createddate": "2022-01-01T00:00:00Z",
+      "changeddate": "2022-01-01T00:00:00Z"
+    },
+    {
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "username": "janesmith",
+      "email": "janesmith@example.com",
+      "password": "654321",
+      "allergy_lookupid": 1,
+      "createddate": "2022-01-02T00:00:00Z",
+      "changeddate": "2022-01-02T00:00:00Z"
+    }
+  ]
+  
