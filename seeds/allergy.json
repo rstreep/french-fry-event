@@ -1,0 +1,14 @@
+[
+    {
+      "allergy_id": 1,
+      "allergy_product": "Peanuts"
+    },
+    {
+      "allergy_id": 2,
+      "allergy_product": "Shellfish"
+    },
+    {
+      "allergy_id": 3,
+      "allergy_product": "Eggs"
+    }
+  ]

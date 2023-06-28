@@ -5,20 +5,21 @@
  * It exports an Express router with the defined routes.
  */
 const router = require('express').Router();
-const { ff_event_guest_map, ff_event, ff_lookup, ff_menu, ff_user} = require('../models');
+const { ff_event_guest_map, ff_event, ff_lookup, ff_menu, User} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-    try {
       // only for debugging  
-      //res.send ('Home page router!!!!')
+      res.send ('Home page router!!!!')
+    // try {
+
 
     //   // Get all blogs and JOIN with user data
     //   const blogData = await Blog.findAll({
     //     include: [
     //       {
     //         model: User,
-    //         attributes: ['username'],
+    //         attributes: ['user_name'],
     //       },
     //       {
     //         model: Comment,
@@ -35,16 +36,19 @@ router.get('/', async (req, res) => {
   
     //   console.log(`Home page router!!!! ${JSON.stringify(blogs)}`);
     //   console.log(`Session ID: ${JSON.stringify(req.session)}`);
+    //     const blogs = [];
 
-    console.log("Home page router!!!!");
-      // Pass serialized data and session flag into template
-      res.render('homepage', { 
-        //blogs, 
-        logged_in: isLoggedIn, //false, //req.session.logged_in 
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
+
+    // console.log("Home page router!!!!");
+
+    //   // Pass serialized data and session flag into template
+    //   res.render('homepage', { 
+    //     blogs, 
+    //     logged_in: isLoggedIn, //false, //req.session.logged_in 
+    //   });
+    // } catch (err) {
+    //   res.status(500).json(err);
+    // }
   });
 
   router.get('/login', (req, res) => {
@@ -52,7 +56,7 @@ router.get('/', async (req, res) => {
    // res.send ('Login router!!!!');
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
-      res.redirect('/homepage');
+      res.redirect('/');
       return;
     }
   
@@ -95,7 +99,7 @@ router.get('/', async (req, res) => {
 //       include: [
 //         { model: ff_lookup },
 //         { model: ff_menu },
-//         { model: ff_user }
+//         { model: user }
 //       ]
 //     });
 

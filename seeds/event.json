@@ -1,0 +1,33 @@
+[
+    {
+      "event_name": "Birthday Party",
+      "event_description": "A celebration of John's birthday",
+      "event_type": "Private",
+      "street_address": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zip": 10001,
+      "event_date": "2023-07-15"
+    },
+    {
+      "event_name": "Wedding Reception",
+      "event_description": "A joyous celebration of Sarah and Michael's wedding",
+      "event_type": "Public",
+      "street_address": "456 Elm St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": 90001,
+      "event_date": "2023-08-20"
+    },
+    {
+      "event_name": "Corporate Conference",
+      "event_description": "An industry conference bringing together professionals from various companies",
+      "event_type": "Corporate",
+      "street_address": "789 Oak Ave",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": 60601,
+      "event_date": "2023-09-10"
+    }
+  ]
+  

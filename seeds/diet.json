@@ -1,0 +1,14 @@
+[
+    {
+      "diet_id": 1,
+      "diet_name": "Vegan"
+    },
+    {
+      "diet_id": 2,
+      "diet_name": "Paleo"
+    },
+    {
+      "diet_id": 3,
+      "diet_name": "Keto"
+    }
+  ]
