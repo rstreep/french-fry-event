@@ -6,7 +6,7 @@
  */
 const router = require('express').Router();
 // Export the user model for use in other modules
-const { ff_user } = require('../../models');
+const { User } = require('../../models');
 
 // Route: POST /
 // Description: Creates a new user and saves their information to the database.
@@ -15,7 +15,7 @@ const { ff_user } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     // Create a new user record in the database using the provided request body
-    const userData = await ff_user.create(req.body);
+    const userData = await User.create(req.body);
 
     // Save session variables after user creation
     req.session.save(() => {
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     // Find the user data in the database based on the provided email
-    const userData = await ff_user.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
       // If user data is not found, respond with an error message

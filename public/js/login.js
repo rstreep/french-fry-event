@@ -28,7 +28,7 @@ const loginFormHandler = async (event) => {
   
       if (response.ok) {
         // If the response is successful, redirect the browser to the profile page
-        document.location.replace('/homepage');
+        document.location.replace('/');
       } else {
         // If the response is unsuccessful, display an alert with the error message
         const errorMessage = await response.text();
@@ -44,24 +44,24 @@ const loginFormHandler = async (event) => {
   const signupFormHandler = async (event) => {
     event.preventDefault();
   
-    const username = document.querySelector('#name-signup').value.trim();
+    const user_name = document.querySelector('#name-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
   
-    // console.log (JSON.stringify({ username, email, password }));
+    // console.log (JSON.stringify({ user_name, email, password }));
 
-    if (username && email && password) {
-        alert (JSON.stringify({ username, email, password }));
+    if (user_name && email && password) {
+       // alert (JSON.stringify({ user_name, email, password }));
       // Send a POST request to the '/api/users' endpoint
       const response = await fetch('/api/users', {
         method: 'POST',
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ user_name, email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
         // If the response is successful, redirect the browser to the profile page
-        document.location.replace('/homepage');
+        document.location.replace('/');
       } else {
         //If the response is unsuccessful, display a prompt with the error message
         const errorMessage = await response.text();

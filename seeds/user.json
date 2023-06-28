@@ -1,23 +1,29 @@
 [
-    {
-      "firstname": "John",
-      "lastname": "Doe",
-      "username": "johndoe",
-      "email": "johndoe@example.com",
-      "password": "123456",
-      "allergy_lookupid": null,
-      "createddate": "2022-01-01T00:00:00Z",
-      "changeddate": "2022-01-01T00:00:00Z"
-    },
-    {
-      "firstname": "Jane",
-      "lastname": "Smith",
-      "username": "janesmith",
-      "email": "janesmith@example.com",
-      "password": "654321",
-      "allergy_lookupid": 1,
-      "createddate": "2022-01-02T00:00:00Z",
-      "changeddate": "2022-01-02T00:00:00Z"
-    }
-  ]
-  
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "user_name": "johndoe",
+    "email": "john@example.com",
+    "password": "password1",
+    "created_date": "2023-06-28",
+    "changed_date": null
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "user_name": "janesmith",
+    "email": "jane@example.com",
+    "password": "password2",
+    "created_date": "2023-06-28",
+    "changed_date": null
+  },
+  {
+    "first_name": "Robert",
+    "last_name": "Johnson",
+    "user_name": "robertjohnson",
+    "email": "robert@example.com",
+    "password": "password3",
+    "created_date": "2023-06-28",
+    "changed_date": null
+  }
+]
