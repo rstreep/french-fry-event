@@ -25,18 +25,18 @@ Guest.init(
         // Foreign key referencing user table
         user_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'user_id'
-              }
+            // references: {
+            //     model: 'user',
+            //     key: 'user_id'
+            //   }
         },
         // Foreign key referencing event table
         event_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'event',
-                key: 'event_id'
-              }
+            // references: {
+            //     model: 'event',
+            //     key: 'event_id'
+            //   }
         }
     },
     // Configure options

@@ -24,18 +24,18 @@ Menu.init(
         dish_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: {
-              model: 'dish',
-              key: 'dish_id'
-            }
+            // references: {
+            //   model: 'dish',
+            //   key: 'dish_id'
+            // }
         },
         // Foreign key referencing event table
         event_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'event',
-                key: 'event_id'
-              }
+            // references: {
+            //     model: 'event',
+            //     key: 'event_id'
+            //   }
         }
     },
     // Configure options

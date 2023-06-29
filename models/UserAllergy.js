@@ -22,19 +22,19 @@ UserAllergy.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'user',
-        key: 'user_id'
-      }
+      // references: {
+      //   model: 'user',
+      //   key: 'user_id'
+      // }
     },
     // Foreign key referencing allergy table
     allergy_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'allergy',
-        key: 'allergy_id'
-      }
+      // references: {
+      //   model: 'allergy',
+      //   key: 'allergy_id'
+      // }
     }
   },
   {

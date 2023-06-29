@@ -8,25 +8,34 @@ const eventData = require('./event.json');
 const dishData = require('./dish.json');
 
 // Function to seed the Event model
-const seedEvents = async () => {
+const seedEvents = async (users) => {
   try {
+    const eventsWithHosts = eventData.map(event => ({
+      ...event,
+      host_user_id: users[Math.floor(Math.random() * users.length)].user_id
+    }));
+
     // Bulk create events
-    await Event.bulkCreate(eventData, { individualHooks: true, returning: true });
+    await Event.bulkCreate(eventsWithHosts, { individualHooks: true, returning: true });
     console.log('Event seed data inserted successfully.');
   } catch (error) {
     console.error('Error seeding events:', error);
   }
 };
+
 // Function to seed the Allergy model
 const seedAllergies = async () => {
   try {
     // Bulk create allergies
+
     const allergies = await Allergy.bulkCreate(allergyData, { individualHooks: true, returning: true });
     console.log('Allergies seed data inserted successfully.');
+    return allergies;
   } catch (error) {
     console.error('Error seeding allergies:', error);
+    return error;
   }
-  return allergies;
+  //return allergies;
 };
 // Function to seed the Diet model
 const seedDiets= async () => {
@@ -34,10 +43,11 @@ const seedDiets= async () => {
     // Seed diets
     const diets = await Diet.bulkCreate(dietData, { individualHooks: true, returning: true });
     console.log('Diet seed data inserted successfully.');
+    return diets;
   } catch (error) {
     console.error('Error seeding diets:', error);
+    return error;
   }
-  return diets;
 };
 // Function to seed the User model
 const seedUsers= async () => {
@@ -45,14 +55,15 @@ const seedUsers= async () => {
     // Seed users
     const users = await User.bulkCreate(userData, { individualHooks: true, returning: true });
     console.log('User seed data inserted successfully.');
+    return users;
   } catch (error) {
     console.error('Error seeding users:', error);
+    return error;
   }
-  return users;
 };
 
 // Seed UserAllergy associations
-const seedUserAllergies = async () => {
+const seedUserAllergies = async (users, allergies) => {
   try {
     const userAllergyData = [];
     for (const user of users) {
@@ -63,7 +74,6 @@ const seedUserAllergies = async () => {
         userAllergyData.push({ user_id: userId, allergy_id: allergyId });
       }
     }
-
     // Bulk create UserAllergy associations
     await UserAllergy.bulkCreate(userAllergyData, { individualHooks: true, returning: true });
     console.log('UserAllergy associations seeded successfully.');
@@ -72,7 +82,7 @@ const seedUserAllergies = async () => {
   }
 };
 // Seed UserDiet associations
-const seedUserDiets = async () => {
+const seedUserDiets = async (users, diets) => {
   try {
     const userDietData = [];
     for (const user of users) {
@@ -92,7 +102,7 @@ const seedUserDiets = async () => {
   }
 };
   // Seed Guest associations
-const seedGuests = async () => {
+const seedGuests = async (users, events) => {
   try {
     // Generate random guest associations
     const guestData = [];
@@ -123,11 +133,11 @@ const seedDishes = async () => {
   } catch (error) {
     console.error('Error seeding dishes:', error);
   }
-  return dishes;
+  //return dishes;
 };
 
 // Async function to seed Menu table
-const seedMenu = async () => {
+const seedMenu = async (events, dishes) => {
   try {
     // Array to store menu associations
     const menuData = [];
@@ -153,12 +163,12 @@ const seedDatabase = async () => {
     const allergies  = await seedAllergies();
     const diets = await seedDiets();
     const users = await seedUsers();
-    const userAllergies = await seedUserAllergies();
-    const userDiets = await seedUserDiets();
-    const events = await seedEvents();
-    const guests = await seedGuests();
+    const userAllergies = await seedUserAllergies(users, allergies);
+    const userDiets = await seedUserDiets(users, diets);
+    const events = await seedEvents(users);
+    //const guests = await seedGuests(users, events);
     const dishes = await seedDishes();
-    const menu = await seedMenu();
+    //const menu = await seedMenu(events, dishes);
 
     console.log('Database seeded successfully.');
 

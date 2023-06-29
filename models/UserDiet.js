@@ -22,19 +22,19 @@ UserDiet.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'user',
-        key: 'user_id'
-      }
+      // references: {
+      //   model: 'user',
+      //   key: 'user_id'
+      // }
     },
     // Foreign key referencing diet table
     diet_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: 'diet',
-        key: 'diet_id'
-      }
+      // references: {
+      //   model: 'diet',
+      //   key: 'diet_id'
+      // }
     }
   },
   {
