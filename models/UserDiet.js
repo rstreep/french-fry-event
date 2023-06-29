@@ -1,12 +1,13 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-
 /**
  * UserDiet Model
  *
  * Represents the association between users and diets in a many-to-many relationship.
  * This model defines the UserDiet table and its fields.
  */
+
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+
 class UserDiet extends Model {}
 
 UserDiet.init(
@@ -22,19 +23,19 @@ UserDiet.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // references: {
-      //   model: 'user',
-      //   key: 'user_id'
-      // }
+      references: {
+        model: 'user',
+        key: 'user_id'
+      }
     },
     // Foreign key referencing diet table
     diet_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // references: {
-      //   model: 'diet',
-      //   key: 'diet_id'
-      // }
+      references: {
+        model: 'diet',
+        key: 'diet_id'
+      }
     }
   },
   {
