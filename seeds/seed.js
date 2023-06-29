@@ -16,10 +16,12 @@ const seedEvents = async (users) => {
     }));
 
     // Bulk create events
-    await Event.bulkCreate(eventsWithHosts, { individualHooks: true, returning: true });
+   const events = await Event.bulkCreate(eventsWithHosts, { individualHooks: true, returning: true });
     console.log('Event seed data inserted successfully.');
+    return events;
   } catch (error) {
     console.error('Error seeding events:', error);
+    throw error;
   }
 };
 
@@ -33,7 +35,7 @@ const seedAllergies = async () => {
     return allergies;
   } catch (error) {
     console.error('Error seeding allergies:', error);
-    return error;
+    throw error;
   }
   //return allergies;
 };
@@ -46,7 +48,7 @@ const seedDiets= async () => {
     return diets;
   } catch (error) {
     console.error('Error seeding diets:', error);
-    return error;
+    throw error;
   }
 };
 // Function to seed the User model
@@ -58,7 +60,7 @@ const seedUsers= async () => {
     return users;
   } catch (error) {
     console.error('Error seeding users:', error);
-    return error;
+    throw error;
   }
 };
 
@@ -130,10 +132,11 @@ const seedDishes = async () => {
     // Bulk create dishes
     const dishes = await Dish.bulkCreate(dishData, { individualHooks: true, returning: true });
     console.log('Dish seed data inserted successfully.');
+    return dishes;
   } catch (error) {
     console.error('Error seeding dishes:', error);
+    throw error;
   }
-  //return dishes;
 };
 
 // Async function to seed Menu table
@@ -160,15 +163,18 @@ const seedMenu = async (events, dishes) => {
 const seedDatabase = async () => {
   try {
 
+    // For debugging purposes - delete all data from tables before seeding
+    await sequelize.sync({ force: true });
+
     const allergies  = await seedAllergies();
     const diets = await seedDiets();
     const users = await seedUsers();
     const userAllergies = await seedUserAllergies(users, allergies);
     const userDiets = await seedUserDiets(users, diets);
     const events = await seedEvents(users);
-    //const guests = await seedGuests(users, events);
+    const guests = await seedGuests(users, events);
     const dishes = await seedDishes();
-    //const menu = await seedMenu(events, dishes);
+    const menu = await seedMenu(events, dishes);
 
     console.log('Database seeded successfully.');
 
@@ -180,3 +186,5 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+
+

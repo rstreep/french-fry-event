@@ -22,72 +22,79 @@ const Menu = require('./Menu');
 
 // Define associations
 
-// User - Event association
-User.belongsToMany(Event, {
-  through: Guest,
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
-});
-Event.belongsToMany(User, {
-  through: Guest,
-  foreignKey: 'event_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
-});
-
-// Event - User association (host_user_id)
-Event.belongsTo(User, {
-  foreignKey: 'host_user_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
-});
+//User - Event associations (host_user_id)
 User.hasMany(Event, {
+  //through: Guest,
   foreignKey: 'host_user_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+});
+Event.belongsTo(User, {
+  //through: Guest,
+  foreignKey: 'host_user_id'
 });
 
-// Event - Dish association
+//User - Guest association
+User.hasMany(Guest, {
+foreignKey: 'user_id',
+});
+Guest.belongsTo(User, {
+foreignKey: 'user_id',
+});
+
+//Event - Guest association
+Event.hasMany(Guest, {
+    foreignKey: 'event_id',
+});
+Guest.belongsTo(Event, {
+    foreignKey: 'event_id',
+});
+
+//Event - Dish association
 Event.belongsToMany(Dish, {
-  through: Menu,
-  foreignKey: 'event_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+  through: {
+    model: Menu,
+    unique: false
+  },
+  as: 'e_dish'
 });
 Dish.belongsToMany(Event, {
-  through: Menu,
-  foreignKey: 'dish_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+    through: {
+        model: Menu,
+        unique: false
+      },
+      as: 'e_dish'
 });
 
 // User - Allergy association
 User.belongsToMany(Allergy, {
-  through: UserAllergy,
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
-});
-Allergy.belongsToMany(User, {
-  through: UserAllergy,
-  foreignKey: 'allergy_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+    through: {
+        model: UserAllergy,
+        unique: false
+    },
+   as: 'u_allergy'
 });
 
-// User - Diet association
+Allergy.belongsToMany(User, {
+    through: {
+        model: UserAllergy,
+        unique: false
+    },
+   as: 'u_allergy'
+});
+
+// // User - Diet association
 User.belongsToMany(Diet, {
-  through: UserDiet,
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+  through: {
+    model: UserDiet,
+    unique: false
+  },
+  as: 'u_diet'
 });
 Diet.belongsToMany(User, {
-  through: UserDiet,
-  foreignKey: 'diet_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+    through: {
+        model: UserDiet,
+        unique: false
+      },
+      as: 'u_diet'
 });
 
 // Export model associations
