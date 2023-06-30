@@ -60,6 +60,24 @@ User.init(
         len: [6]
       }
     },
+    street_address: {
+      type: DataTypes.STRING
+    },
+    // Event city field
+    city: {
+      type: DataTypes.STRING
+    },
+    // Event state field
+    state: {
+      type: DataTypes.STRING
+    },
+    // Event zip code field
+    zip: {
+      type: DataTypes.INTEGER,
+      validate: {
+        len: [5],
+      },
+    },
     // Created date field
     created_date: {
       type: DataTypes.DATE,
@@ -73,12 +91,12 @@ User.init(
   },
   {
     hooks: {
-        // Hashes the user's password before creating a new user
+      // Hashes the user's password before creating a new user
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-       // Hashes the user's password before updating an existing user
+      // Hashes the user's password before updating an existing user
       beforeUpdate: async (updatedUserData) => {
         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;
