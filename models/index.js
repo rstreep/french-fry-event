@@ -61,7 +61,7 @@ Dish.belongsToMany(Event, {
         model: Menu,
         unique: false
       },
-      as: 'e_dish'
+      as: 'dish_e'
 });
 
 // User - Allergy association
