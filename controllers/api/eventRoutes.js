@@ -3,7 +3,17 @@ const router = require('express').Router();
 const { Event } = require('../../models');
 
 
-// ToDo - Get all events
+// Route handler for getting all dishes
+router.get('/', async (req, res) => {
+    try {
+        const eventData = await Event.findAll();      
+      // Return the list of allergies as a JSON response
+      res.status(200).json(eventData);
+    } catch (err) {
+    // Handle errors and respond with the error in JSON format
+    res.status(500).json({ error: 'Failed to fetch events' });
+    }
+  });
 
 // ToDo - Get a single event by id
 
