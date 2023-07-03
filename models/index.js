@@ -19,6 +19,7 @@ const UserAllergy = require('./UserAllergy');
 const Event = require('./Event');
 const Guest = require('./Guest');
 const Menu = require('./Menu');
+const Map = require('./map');
 
 // Define associations
 
@@ -107,5 +108,6 @@ module.exports = {
   UserAllergy,
   Event,
   Guest,
-  Menu
+  Menu,
+  Map
 };

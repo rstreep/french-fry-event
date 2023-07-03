@@ -63,7 +63,9 @@ router.get('/', async (req, res) => {
     res.render('login');
   });
 
-
+router.get('/map', (req, res) => {
+  res.render('map');
+})
 
 
 
@@ -118,6 +120,8 @@ router.get('/', async (req, res) => {
 // });
 
 /////////////////////////////////////////////////////////
+
+
 
 
 module.exports = router;
