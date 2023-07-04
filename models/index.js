@@ -24,11 +24,9 @@ const Menu = require('./Menu');
 
 //User - Event associations (host_user_id)
 User.hasMany(Event, {
-  //through: Guest,
   foreignKey: 'host_user_id',
 });
 Event.belongsTo(User, {
-  //through: Guest,
   foreignKey: 'host_user_id'
 });
 
@@ -48,21 +46,30 @@ Guest.belongsTo(Event, {
     foreignKey: 'event_id',
 });
 
-//Event - Dish association
-Event.belongsToMany(Dish, {
-  through: {
-    model: Menu,
-    unique: false
-  },
-  as: 'e_dish'
+//Event - Guest association
+Event.hasMany(Menu, {
+  foreignKey: 'event_id',
 });
-Dish.belongsToMany(Event, {
-    through: {
-        model: Menu,
-        unique: false
-      },
-      as: 'dish_e'
+Guest.belongsTo(Menu, {
+  foreignKey: 'event_id',
 });
+
+
+// //Event - Dish association
+// Event.belongsToMany(Dish, {
+//   through: {
+//     model: Menu,
+//     unique: false
+//   },
+//   as: 'e_dish'
+// });
+// Dish.belongsToMany(Event, {
+//     through: {
+//         model: Menu,
+//         unique: false
+//       },
+//       as: 'dish_e'
+// });
 
 // User - Allergy association
 User.belongsToMany(Allergy, {
