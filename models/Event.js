@@ -72,14 +72,6 @@ Event.init(
                 key: 'user_id'
               }
         },
-        // // Foreign key referencing menu table
-        // menu_id: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: 'menu',
-        //         key: 'menu_id'
-        //       }            
-        // },
     },
     {
         sequelize,

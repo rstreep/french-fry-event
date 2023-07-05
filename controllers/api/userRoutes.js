@@ -8,6 +8,24 @@ const router = require('express').Router();
 // Export the user model for use in other modules
 const { User } = require('../../models');
 
+
+// ToDo - Get all users
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll();
+    // Return the list of users as a JSON response
+    res.status(200).json(userData);
+  } catch (err) {
+    // Handle errors and respond with the error in JSON format
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+// ToDo - Get a single user by id
+// ToDo - Update a user by id
+// ToDo - Delete a user by id
+
+
+
 // Route: POST /
 // Description: Creates a new user and saves their information to the database.
 //              Upon successful creation, logs the user in by setting session variables.
