@@ -46,30 +46,23 @@ Guest.belongsTo(Event, {
     foreignKey: 'event_id',
 });
 
-//Event - Guest association
+//Event - Menu association
 Event.hasMany(Menu, {
   foreignKey: 'event_id',
 });
-Guest.belongsTo(Menu, {
+Menu.belongsTo(Event, {
   foreignKey: 'event_id',
 });
 
-
-// //Event - Dish association
-// Event.belongsToMany(Dish, {
-//   through: {
-//     model: Menu,
-//     unique: false
-//   },
-//   as: 'e_dish'
-// });
-// Dish.belongsToMany(Event, {
-//     through: {
-//         model: Menu,
-//         unique: false
-//       },
-//       as: 'dish_e'
-// });
+// Menu - Dish association
+//User - Guest association
+Dish.hasMany(Menu, {
+  foreignKey: 'dish_id',
+  });
+  Menu.belongsTo(Dish, {
+  foreignKey: 'dish_id',
+  });
+  
 
 // User - Allergy association
 User.belongsToMany(Allergy, {
