@@ -245,7 +245,7 @@ router.delete('/event/:event_id', async (req, res) => {
             // Delete the associated menus
             await Menu.destroy({ where: { event_id: eventId }, transaction: t });
             // Delete the event
-            await event.destroy({ transaction: t });
+            await event.destroy({ where: { event_id: eventId },transaction: t });
             // Return a success message
             res.status(200).json({ message: 'Event deleted successfully.' });
         });
