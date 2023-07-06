@@ -32,10 +32,10 @@ Dish.init(
         },
         // Recipe field
         recipe: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         ingredients: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         // Photo link field
         photo_link: {

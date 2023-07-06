@@ -1,8 +1,9 @@
 /**
- * userRoutes.js
+ * userRoutes.js ( routerPath: /api/users)
  *
  * This module defines the routes for handling users-related operations.
  * It exports an Express router with the defined routes.
+ * 
  */
 const router = require('express').Router();
 // Export the user model for use in other modules
@@ -23,6 +24,8 @@ router.get('/', async (req, res) => {
 // ToDo - Get a single user by id
 // ToDo - Update a user by id
 // ToDo - Delete a user by id
+// ToDo - Get all diet for a single user (by user_id)
+// ToDo - Get all allergies for a single user (by user_id)
 
 
 
