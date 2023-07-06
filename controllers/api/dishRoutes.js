@@ -7,12 +7,12 @@
  */
 const router = require('express').Router();
 // Export the dish model for use in other modules
-const { Dish } = require('../../models');
+const { Dish, Menu } = require('../../models');
 
 // Route handler for getting all dishes
 router.get('/', async (req, res) => {
     try {
-        const dishData = await Dish.findAll();      
+        const dishData = await Dish.findAll({include: [Menu]});      
       // Return the list of allergies as a JSON response
       res.status(200).json(dishData);
     } catch (err) {
@@ -88,15 +88,21 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// ToDo - Get all dishes for a single event (by event_id)
-// ToDo - Get all dishes for a single user (by user_id)
-// ToDo - Get all dishes for a single menu (by menu_id)
-//////////////////////////////////
-// ToDo - Get all allergies for a single event (by event_id)
-//////////////////////////////////
-// ToDo - Get all allergies for a single dish (by dish_id)
-//////////////////////////////////
-// ToDo - Get all allergies for a single menu (by menu_id)
-//////////////////////////////////
-
+// Get all dishes for a single menu (by menu_id)
+router.get('/menu/:menu_id', async (req, res) => {
+    try {
+        const dishData = await Menu.findAll({
+            where: {
+                menu_id: req.params.menu_id,
+            },
+            include: [Dish],
+        });
+        if (!dishData) {
+            return res.status(404).json({ message: 'No dish found with this Menu!' });
+        }
+        res.status(200).json(dishData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 module.exports = router
