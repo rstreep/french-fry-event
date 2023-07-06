@@ -43,3 +43,10 @@
       background-color: #04AA6D;
     }
   
+    [data-state=hidden] {
+      display: none
+    }
+    [data-state=show] {
+      display: block;
+      top: 100px
+    }

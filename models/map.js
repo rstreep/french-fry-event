@@ -12,7 +12,7 @@ Map.init(
       primaryKey: true
     },
     location_name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     lat: {
         type: DataTypes.STRING,
@@ -26,7 +26,7 @@ Map.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'map',
+    modelName: 'mapTable',
   }
 );
 

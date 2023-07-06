@@ -14,4 +14,14 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
+router.get('/', async (req, res)=> {
+  try {
+    const mapData = await Map.findAll({
+
+    });
+    res.json(mapData)
+  } catch(err) {
+    res.status(400).json(err);
+  }
+});
 module.exports = router

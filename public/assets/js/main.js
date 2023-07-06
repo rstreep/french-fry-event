@@ -161,7 +161,7 @@ directionsButton.addEventListener('click', (event) => {
     var start = $('#address').val();
     var end = $('#eventLocation').val();
 
-    var url = "http://127.0.0.1:5501/family-event-planner/map.html?start=" + start + "&destination=" + end;
+    var url = "http://127.0.0.1:5555/family-event-planner/map.html?start=" + start + "&destination=" + end;
     if ($('#directionsLink').html()) {
         // console.log('it is direction link');
     } else {
