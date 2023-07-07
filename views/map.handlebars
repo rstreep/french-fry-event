@@ -1,0 +1,33 @@
+<div id="map"></div>
+<div class="formSection">
+    <form id="form">
+        <input type="text" name="start" class="input" id="start" placeholder="choose starting point">
+        <input type="text" name="end" class="input" id="destination" placeholder="choose destination">
+        <button type="submit" id="directions">Get Directions</button>
+    </form>
+
+</div>
+<div class="formSection1">
+    <form id="form1">
+        <input type="text" name="start" class="input" id="start" placeholder="type in address">
+        <button type="submit" id="locations">Save Location</button>
+    </form>
+     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+    <!-- Modal Structure -->
+  <div id="modal1" class="modal" data-state="hidden"> 
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <form id="icon-name">
+        <input type="text" value="text" id="icon-name-input">
+        <input type="hidden" value="" id="lat">
+         <input type="hidden" value="" id="lng">
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+  <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=JGtXxzwkQ8i2VUU01wowQPnFD75VxyDv"></script>
+  <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=JGtXxzwkQ8i2VUU01wowQPnFD75VxyDv"></script>
+   <script src="/assets/js/map.js"></script>
+   
