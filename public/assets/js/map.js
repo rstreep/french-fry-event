@@ -65,7 +65,6 @@ function captureText(e) {
     e.preventDefault();
     var iconNameInput = document.querySelector("#icon-name-input");
     var text = iconNameInput.value;
-    
 
     displayModal();
 
@@ -176,3 +175,18 @@ document.getElementById("cancel-button").addEventListener("click", function(e) {
   
   const form = document.getElementById('form');
   form.addEventListener('submit', submitForm);
+  document.getElementById('locations');
+
+  // Add event listener to the button
+  const locationsButton = document.getElementById('locations');
+  locationsButton.addEventListener('click', getAllMapData, { passive: true });
+  
+  async function getAllMapData() {
+    const response = await fetch('/api/map/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+    };

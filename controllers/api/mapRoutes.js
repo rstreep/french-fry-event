@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const { Map } = require('../../models');
-
+const express =require('express');
+const app = express();
 const withAuth = require('../../utils/auth');
 
 router.post('/', async (req, res) => {
@@ -14,14 +16,27 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
-router.get('/', async (req, res)=> {
-  try {
-    const mapData = await Map.findAll({
+// router.get('/', async (req, res)=> {
+//   try {
+//     const mapData = await Map.findAll({
 
-    });
-    res.json(mapData)
-  } catch(err) {
+//     });
+//     res.json(mapData)
+//   } catch(err) {
+//     res.status(400).json(err);
+//   }
+// });
+router.get('/', async (req, res) => {
+  try {
+    const allMaps = await Map.findAll();
+
+    res.status(200).json(allMaps);
+  } catch (err) {
     res.status(400).json(err);
   }
 });
+  
+  // Define the API endpoint
+  
+ 
 module.exports = router
