@@ -11,6 +11,7 @@
 // Description: Handles the submission of the login form.
 //              Collects values from the form, sends a POST request to the '/api/users/login' endpoint,
 //              and redirects the browser to the profile page on success or displays an alert on failure.
+
 const loginFormHandler = async (event) => {
     event.preventDefault();
   
@@ -48,7 +49,7 @@ const loginFormHandler = async (event) => {
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
   
-    // console.log (JSON.stringify({ user_name, email, password }));
+    console.log (JSON.stringify({ user_name, email, password }));
 
     if (user_name && email && password) {
        // alert (JSON.stringify({ user_name, email, password }));
@@ -72,11 +73,11 @@ const loginFormHandler = async (event) => {
   
   // Attach event listeners to the login forms
   document
-    .querySelector('.login-form')
+    .querySelector('#login-form')
     .addEventListener('submit', loginFormHandler);
     // Attach event listeners to the  signup forms
   document
-    .querySelector('.signup-form')
+    .querySelector('#create-account-form')
     .addEventListener('submit', signupFormHandler);
   
   // Export the module to be used in other parts of the application
