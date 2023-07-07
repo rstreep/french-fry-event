@@ -29,6 +29,7 @@ const loginFormHandler = async (event) => {
       if (response.ok) {
         // If the response is successful, redirect the browser to the profile page
         document.location.replace('/');
+        //console.log('loginFormHandler: response.ok');
       } else {
         // If the response is unsuccessful, display an alert with the error message
         const errorMessage = await response.text();
@@ -72,11 +73,11 @@ const loginFormHandler = async (event) => {
   
   // Attach event listeners to the login forms
   document
-    .querySelector('.login-form')
+    .querySelector('#login-form')
     .addEventListener('submit', loginFormHandler);
     // Attach event listeners to the  signup forms
   document
-    .querySelector('.signup-form')
+    .querySelector('#create-account-form')
     .addEventListener('submit', signupFormHandler);
   
   // Export the module to be used in other parts of the application
