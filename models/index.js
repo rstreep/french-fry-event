@@ -25,11 +25,9 @@ const Map = require('./map');
 
 //User - Event associations (host_user_id)
 User.hasMany(Event, {
-  //through: Guest,
   foreignKey: 'host_user_id',
 });
 Event.belongsTo(User, {
-  //through: Guest,
   foreignKey: 'host_user_id'
 });
 
@@ -49,54 +47,56 @@ Guest.belongsTo(Event, {
     foreignKey: 'event_id',
 });
 
-//Event - Dish association
-Event.belongsToMany(Dish, {
-  through: {
-    model: Menu,
-    unique: false
-  },
-  as: 'e_dish'
+//Event - Menu association
+Event.hasMany(Menu, {
+  foreignKey: 'event_id',
 });
-Dish.belongsToMany(Event, {
-    through: {
-        model: Menu,
-        unique: false
-      },
-      as: 'e_dish'
+Menu.belongsTo(Event, {
+  foreignKey: 'event_id',
 });
 
-// User - Allergy association
-User.belongsToMany(Allergy, {
-    through: {
-        model: UserAllergy,
-        unique: false
-    },
-   as: 'u_allergy'
-});
+// Menu - Dish association
+Dish.hasMany(Menu, {
+  foreignKey: 'dish_id',
+  });
+  Menu.belongsTo(Dish, {
+  foreignKey: 'dish_id',
+  });
+  
 
-Allergy.belongsToMany(User, {
-    through: {
-        model: UserAllergy,
-        unique: false
-    },
-   as: 'u_allergy'
-});
+  
+//User - Allergy association
+User.hasMany(UserAllergy, {
+  foreignKey: 'user_id',
+  });
+  UserAllergy.belongsTo(User, {
+  foreignKey: 'user_id',
+  });
+  
+  //Event - Guest association
+  Allergy.hasMany(UserAllergy, {
+      foreignKey: 'allergy_id',
+  });
+  UserAllergy.belongsTo(Allergy, {
+      foreignKey: 'allergy_id',
+  });
 
-// // User - Diet association
-User.belongsToMany(Diet, {
-  through: {
-    model: UserDiet,
-    unique: false
-  },
-  as: 'u_diet'
-});
-Diet.belongsToMany(User, {
-    through: {
-        model: UserDiet,
-        unique: false
-      },
-      as: 'u_diet'
-});
+
+  //User - Diet association
+User.hasMany(UserDiet, {
+  foreignKey: 'user_id',
+  });
+  UserDiet.belongsTo(User, {
+  foreignKey: 'user_id',
+  });
+  
+  //Event - Guest association
+  Diet.hasMany(UserDiet, {
+      foreignKey: 'diet_id',
+  });
+  UserDiet.belongsTo(Diet, {
+      foreignKey: 'diet_id',
+  });
 
 // Export model associations
 module.exports = {

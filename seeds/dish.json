@@ -1,24 +1,23 @@
 [
-    {
-      "dish_type": "Appetizer",
-      "dish_name": "Bruschetta",
-      "recipe": "Mix tomatoes, basil, garlic, olive oil, salt, and pepper. Toast bread slices and top with tomato mixture. Serve.",
-      "ingredients": "Tomatoes, Basil, Garlic, Olive Oil, Salt, Pepper, Bread",
-      "photo_link": "https://example.com/bruschetta.jpg"
-    },
-    {
-      "dish_type": "Main Course",
-      "dish_name": "Grilled Salmon",
-      "recipe": "Marinate salmon fillets with lemon juice, garlic, salt, and pepper. Grill until cooked through. Serve with a side of vegetables.",
-      "ingredients": "Salmon Fillets, Lemon Juice, Garlic, Salt, Pepper, Vegetables",
-      "photo_link": "https://example.com/grilled-salmon.jpg"
-    },
-    {
-      "dish_type": "Dessert",
-      "dish_name": "Chocolate Cake",
-      "recipe": "Mix flour, sugar, cocoa powder, baking powder, baking soda, salt, eggs, milk, vegetable oil, and vanilla extract. Pour batter into a cake pan and bake. Frost with chocolate ganache.",
-      "ingredients": "Flour, Sugar, Cocoa Powder, Baking Powder, Baking Soda, Salt, Eggs, Milk, Vegetable Oil, Vanilla Extract, Chocolate Ganache",
-      "photo_link": "https://example.com/chocolate-cake.jpg"
-    }
-  ]
-  
+  {
+    "dish_type": "Appetizer",
+    "dish_name": "Bruschetta",
+    "recipe": "Mix tomatoes, basil, garlic, olive oil, salt, and pepper. Toast bread slices and top with tomato mixture. Serve.",
+    "ingredients": "Tomatoes, Basil, Garlic, Olive Oil, Salt, Pepper, Bread",
+    "photo_link": "https://example.com/bruschetta.jpg"
+  },
+  {
+    "dish_type": "Main Course",
+    "dish_name": "Grilled Salmon",
+    "recipe": "Marinate salmon fillets with lemon juice, garlic, salt, and pepper. Grill until cooked through. Serve with a side of vegetables.",
+    "ingredients": "Salmon Fillets, Lemon Juice, Garlic, Salt, Pepper, Vegetables",
+    "photo_link": "https://example.com/grilled-salmon.jpg"
+  },
+  {
+    "dish_type": "Dessert",
+    "dish_name": "Chocolate Cake",
+    "recipe": "Mix flour, sugar, cocoa powder, baking powder, baking soda, salt, eggs, milk, vegetable oil, and vanilla extract. Pour batter into a cake pan and bake. Frost with chocolate ganache.",
+    "ingredients": "Flour, Sugar, Cocoa Powder, Baking Powder, Baking Soda, Salt, Eggs, Milk, Vegetable Oil, Vanilla Extract, Chocolate Ganache",
+    "photo_link": "https://example.com/chocolate-cake.jpg"
+  }
+]
