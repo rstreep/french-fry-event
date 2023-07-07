@@ -23,6 +23,7 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // Create an instance of the Express application
 const app = express();
+const axios= require('axios');
 // Set the port number for the server
 const PORT = process.env.PORT || 5555;
 
@@ -62,7 +63,12 @@ app.use(express.static(path.join(__dirname, 'public')));      // Serve static fi
 // Route setup
 app.use(routes);
 
+
+
+
+
 // Database synchronization and server start
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening on http://127.0.0.1:' + PORT));
 });
+

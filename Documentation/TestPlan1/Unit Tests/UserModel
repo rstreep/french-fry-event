@@ -1,4 +1,5 @@
 Feature: User Model
+
 Scenario: Check user password
 Given a user with the password "password"
 When the user checks the password "password"
