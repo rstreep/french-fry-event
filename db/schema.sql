@@ -7,5 +7,3 @@ CREATE TABLE mapTable (
     latitude DECIMAL (100),
     longitude DECIMAL (100)
 );
-
-
