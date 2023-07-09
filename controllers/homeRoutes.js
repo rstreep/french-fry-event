@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
       return;
     }
   
-    // res.render('login');
+    res.render('login');
   });
 
 router.get('/map', (req, res) => {
