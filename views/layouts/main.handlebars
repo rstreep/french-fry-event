@@ -24,7 +24,7 @@
     <header class="display-flex justify-space-between align-left p-2">
       <style>
         .navbar-fixed {
-          margin-bottom: 200px;
+          margin-bottom: 100px;
         }
 
         .nav-wrapper {
@@ -32,11 +32,34 @@
           padding-right: 10px;
         }
 
+        .card-title-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+
+        .tab-buttons {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 20px;
+        }
+
+        .custom-card {
+          display: flex;
+          justify-content: center;
+          width: 600px;
+          margin-left: 0 auto;
+        }
+
         .card-create-account {
           display: none;
         }
-        .brand-logo{font-size: 45px; font-family: 'Lexend', sans-serif;}
-        
+
+        .brand-logo {
+          font-size: 45px;
+          font-family: 'Lexend', sans-serif;
+        }
+
         html {
           font-family: GillSans, Calibri, Trebuchet, sans-serif;
         }
@@ -75,14 +98,16 @@
   </div>
 
   <!-- <script src="/family-event-planner/assets/js/main.js"></script> -->
-  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-  
-  
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+
+
   <!-- Render script for logged in users only -->
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-  {{!-- <script src="/js/main.js"></script> --}}
+  {{!--
+  <script src="/js/main.js"></script> --}}
 </body>
 
 </html>
