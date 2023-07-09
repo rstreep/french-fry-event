@@ -1,0 +1,190 @@
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title-container">
+            <span class="card-title"><h3>Create an Event!</h3></span>
+          </div>
+        </div>
+        <form id="event-form">
+        <div class="card-tabs">
+          <ul class="tabs">
+            <li class="tab col s4"><a href="#tab1">Event Info</a></li>
+            <li class="tab col s4"><a href="#tab2">Invite Guests</a></li>
+            <li class="tab col s4"><a href="#tab3">Create Menu</a></li>
+          </ul>
+        </div>
+        <div class="card-content center">
+          <div id="tab1">
+            <span class="card-title">Event Info</span>
+                <div class="input-field col s12">
+                  <input id="event-name" type="text" class="validate">
+                  <label for="event-name">Event Name</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event-description" type="text" class="validate">
+                  <label for="event-description">Event Description</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event-type" type="text" class="validate">
+                  <label for="event-type">Event Type</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="street-address" type="text" class="validate">
+                  <label for="street-address">Street Address</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="city" type="text" class="validate">
+                  <label for="city">City</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="state" type="text" class="validate">
+                  <label for="state">State</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="zip-code" type="text" class="validate">
+                  <label for="zip-code">Zip Code</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event-date" type="text" class="validate">
+                  <label for="event-date">Date</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event-time" type="text" class="validate">
+                  <label for="event-time">Time of Day</label>
+                </div>
+                <button class="btn waves-effect waves-light red" type="submit" id="submit-btn">Submit</button>
+                <div class="row">
+                </div>
+          </div>
+          <div id="tab2">
+            <span class="card-title">Invite Guests</span>
+            <div class="input-field col s6">
+              <input id="guestFName" type="text" class="guests">
+              <label for="guestFName">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="guestLName" type="text" class="guests">
+              <label for="guestLName">Last Name</label>
+            </div>
+            <button class="btn waves-effect waves-light red" id="add-guest-btn">add</button>
+            <h6>Guest List:</h6>
+            <div id="guest-list" class="col s12">
+
+            </div>
+            <div class="row">
+            </div>
+          </div>
+          <div id="tab3">
+            <span class="card-title">Create Menu</span>
+            <div class="menuCriteria col s12">
+              <input type="search" id="userSearch" placeholder="Enter Entree here...">            
+              </div>
+              <div class="menuOutput">
+                  <button class="btn waves-effect waves-light red" id="generate">Create Menu</button>
+                  <h4>Appetizer</h4>
+                  <ul class="menu col s12">
+                      <li id="app1"></li>
+                      <li id="app2"></li>
+                  </ul>
+                  <h4>Entree</h4>
+                  <ul>
+                      <li id="ent1"></li>
+                      <li id="ent2"></li>
+                  </ul>
+                  <h4>Dessert</h4>
+                  <ul>
+                      <li id="des1"></li>
+                      <li id="des2"></li>
+                  </ul>
+              </div>
+              </div>
+            <div class="row">
+            </div>
+          </div>
+          <!-- <button class="btn waves-effect waves-light" type="submit" id="submit-btn">Submit</button> -->
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="/assets/js/menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var tabs = document.querySelectorAll('.tabs');
+      M.Tabs.init(tabs);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('event-form');
+      var submitBtn = document.getElementById('submit-btn');
+
+      submitBtn.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        // Get input values
+        var eventName = document.getElementById('event-name').value;
+        var eventDescription = document.getElementById('event-description').value;
+        var eventType = document.getElementById('event-type').value;
+        var streetAddress = document.getElementById('street-address').value;
+        var city = document.getElementById('city').value;
+        var state = document.getElementById('state').value;
+        var zipCode = document.getElementById('zip-code').value;
+        var eventDate = document.getElementById('event-date').value;
+
+        // Create newEventData object
+        var newEventData = {
+          eventName: eventName,
+          eventDescription: eventDescription,
+          eventType: eventType,
+          streetAddress: streetAddress,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          eventDate: eventDate
+        };
+
+        console.log(newEventData); 
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var addBtn = document.getElementById('add-guest-btn');
+      var guestList = document.getElementById('guest-list');
+      var guests = [];
+
+      addBtn.addEventListener('click', function(guest) {
+        event.preventDefault();
+
+        var guestFirstName = document.getElementById('guestFName').value;
+        var guestLastName = document.getElementById('guestLName').value;
+
+        var guest = {
+          firstName: guestFirstName,
+          lastName: guestLastName,
+        };
+
+        guests.push(guest);
+
+        document.getElementById('guestFName').value = '';
+        document.getElementById('guestLName').value = '';
+
+        renderGuestList(guest);
+
+        console.log(guests);
+      });
+
+      function renderGuestList(guest) {
+        guestList.innerHTML = '';
+
+        guests.forEach(function(guest) {
+          var guestItem = document.createElement('div');
+          guestItem.textContent = guest.firstName + ' ' + guest.lastName;
+          guestList.appendChild(guestItem);
+        });
+      }
+    });
+
+  </script>
