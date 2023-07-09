@@ -9,18 +9,14 @@
   {{!--
   <link rel="stylesheet" href="/css/jass.css"> --}}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<<<<<<< HEAD
-  {{!--
-  <link rel="stylesheet" href="/css/style.css"> --}}
+  <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="/assets/css/map.css" />
-=======
-
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="/assets/css/map.css" />
->>>>>>> e053682f6bfec24896ab2b7a5d92b5a373e33157
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -39,7 +35,8 @@
         .card-create-account {
           display: none;
         }
-
+        .brand-logo{font-size: 45px; font-family: 'Lexend', sans-serif;}
+        
         html {
           font-family: GillSans, Calibri, Trebuchet, sans-serif;
         }
@@ -53,7 +50,7 @@
         </ul>
         <nav>
           <div class="nav-wrapper red">
-            <a href="#" class="brand-logo center">🎊Family Fiesta🎊</a>
+            <a href="#" class="brand-logo center">Family<span class="blue-text text-lighten-3"> ★ </span>Fiesta</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li><a href="/">Home</a></li>
               <!-- Conditionally render login or logout links -->
@@ -82,17 +79,10 @@
   
   
   <!-- Render script for logged in users only -->
-<<<<<<< HEAD
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-  {{!--
-  <script src="/js/main.js"></script> --}}
-=======
-
-<script src="/js/main.js"></script>
-{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> --}}
->>>>>>> e053682f6bfec24896ab2b7a5d92b5a373e33157
+  {{!-- <script src="/js/main.js"></script> --}}
 </body>
 
 </html>
