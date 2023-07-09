@@ -4,6 +4,8 @@
  * This module is responsible for initializing and configuring the Node.js server for the project.
  * It sets up the necessary dependencies, middleware, routes, and starts the server.
  */
+// const { autoInstall } = require('auto-install');
+
 
 // Import the 'path' module from the Node.js standard library
 const path = require('path');

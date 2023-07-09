@@ -122,71 +122,111 @@ document.getElementById("cancel-button").addEventListener("click", function(e) {
     return false;
   });
 
-  function runDirections(start, end) {
-    var dir = MQ.routing.directions();
-    dir.route({
-      locations: [start, end]
-    });
-  
-    CustomRouteLayer = MQ.Routing.RouteLayer.extend({
-      createMarker: (location) => {
-        var lat = location.latLng.lat;
-        var lng = location.latLng.lng;
-        var marker = L.marker([lat, lng]).addTo(map);
-        return marker;
-      },
-    });
-  
-    // Remove previous route layer if it exists
-    if (previousRouteLayer) {
-      map.removeLayer(previousRouteLayer);
-    }
-  
-    var routeLayer = new CustomRouteLayer({
-      directions: dir,
-      fitBounds: true
-    });
-  
-    routeLayer.on('draw:created', function (e) {
-      // Your code for handling the created layer
-    });
-  
-    map.addLayer(routeLayer);
-  
-    // Store the current route layer as the previous one
-    previousRouteLayer = routeLayer;
-  }
-  
-  function submitForm(event) {
-    event.preventDefault();
-  
-    // Delete current map layer (so the old route doesn't stay on the map)
-    if (previousRouteLayer) {
-      map.removeLayer(previousRouteLayer);
-    }
-  
-    // Get form data
-    var start = document.getElementById("start").value;
-    var end = document.getElementById("destination").value;
-  
-    // Run directions function
-    runDirections(start, end);
-  }
-  
-  const form = document.getElementById('form');
-  form.addEventListener('submit', submitForm);
-  document.getElementById('locations');
+  var startMarker, endMarker;
+var dir, routeLayer;
+var start, end;
 
-  // Add event listener to the button
-  const locationsButton = document.getElementById('locations');
-  locationsButton.addEventListener('click', getAllMapData, { passive: true });
+function runDirections(startLocation, endLocation) {
+  start = startLocation;
+  end = endLocation;
   
-  async function getAllMapData() {
-    const response = await fetch('/api/map/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  dir = MQ.routing.directions();
+  dir.route({
+    locations: [
+      start,
+      end
+    ]
+  });
+
+  CustomRouteLayer = MQ.Routing.RouteLayer.extend({
+    createMarker: function (location) {
+      var lat = location.latLng.lat;
+      var lng = location.latLng.lng;
+      var marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+      // Update the route when the marker is dragged
+      marker.on('dragend', function (e) {
+        var newLatLng = e.target.getLatLng();
+
+        if (marker === startMarker) {
+          start = newLatLng.lat + ',' + newLatLng.lng;
+        } else if (marker === endMarker) {
+          end = newLatLng.lat + ',' + newLatLng.lng;
+        }
+
+        updateRoute();
       });
-      const data = await response.json();
-    };
+
+      return marker;
+    }
+  });
+
+  routeLayer = new CustomRouteLayer({
+    directions: dir,
+    fitBounds: true
+  });
+
+  routeLayer.addTo(map);
+
+  // Create the start and end markers
+  startMarker = createMarker(start);
+  endMarker = createMarker(end);
+}
+
+function createMarker(location) {
+  var latLng = L.latLng(location.split(','));
+
+  var marker = L.marker(latLng, { draggable: true }).addTo(routeLayer);
+
+  marker.on('dragend', function (e) {
+    var newLatLng = e.target.getLatLng();
+
+    if (marker === startMarker) {
+      start = newLatLng.lat + ',' + newLatLng.lng;
+    } else if (marker === endMarker) {
+      end = newLatLng.lat + ',' + newLatLng.lng;
+    }
+
+    updateRoute();
+  });
+
+  return marker;
+}
+
+function updateRoute() {
+  dir.route({
+    locations: [
+      start,
+      end
+    ]
+  });
+
+  routeLayer.destroy(); // Remove the current route layer
+
+  routeLayer = new CustomRouteLayer({
+    directions: dir,
+    fitBounds: true
+  });
+
+  routeLayer.addTo(map);
+}
+
+function submitForm(event) {
+  event.preventDefault();
+
+  // Delete current map layer (so when you type in a new location the old route doesn't stay on the map)
+  if (routeLayer) {
+    map.removeLayer(routeLayer);
+  }
+
+  // Get form data
+  var startLocation = document.getElementById("start").value;
+  var endLocation = document.getElementById("destination").value;
+
+  // Run directions function
+  runDirections(startLocation, endLocation);
+}
+
+const form = document.getElementById('form');
+// Call the submitForm function when submit
+form.addEventListener('submit', submitForm);

@@ -12,77 +12,78 @@
 //              Collects values from the form, sends a POST request to the '/api/users/login' endpoint,
 //              and redirects the browser to the profile page on success or displays an alert on failure.
 const loginFormHandler = async (event) => {
-    event.preventDefault();
-  
-    // Collect values from the login form
-    const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-  
-    if (email && password) {
-      // Send a POST request to the '/api/users/login' endpoint
-      const response = await fetch('/api/users/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        // If the response is successful, redirect the browser to the profile page
-        document.location.replace('/');
-        //console.log('loginFormHandler: response.ok');
-      } else {
-        // If the response is unsuccessful, display an alert with the error message
-        const errorMessage = await response.text();
-        prompt('Error', errorMessage);
-      }
-    }
-  };
-  
-  // Function: signupFormHandler
-  // Description: Handles the submission of the signup form.
-  //              Collects values from the form, sends a POST request to the '/api/users' endpoint,
-  //              and redirects the browser to the profile page on success or displays an alert on failure.
-  const signupFormHandler = async (event) => {
-    event.preventDefault();
-  
-    const user_name = document.querySelector('#name-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
-  
-    // console.log (JSON.stringify({ user_name, email, password }));
+  event.preventDefault();
 
-    if (user_name && email && password) {
-       // alert (JSON.stringify({ user_name, email, password }));
-      // Send a POST request to the '/api/users' endpoint
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        body: JSON.stringify({ user_name, email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        // If the response is successful, redirect the browser to the profile page
-        document.location.replace('/');
-      } else {
-        //If the response is unsuccessful, display a prompt with the error message
-        const errorMessage = await response.text();
-        prompt('Error', errorMessage);
-      }
+  // Collect values from the login form
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
+
+  if (email && password) {
+    // Send a POST request to the '/api/users/login' endpoint
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      // If the response is successful, redirect the browser to the profile page
+      localStorage.setItem("user_id", response.user_id);
+      console.log(response);
+      document.location.replace('/');
+      //console.log('loginFormHandler: response.ok');
+    } else {
+      // If the response is unsuccessful, display an alert with the error message
+      const errorMessage = await response.text();
+      prompt('Error', errorMessage);
     }
-  };
-  
-  // Attach event listeners to the login forms
-  document
-    .querySelector('#login-form')
-    .addEventListener('submit', loginFormHandler);
-    // Attach event listeners to the  signup forms
-  document
-    .querySelector('#create-account-form')
-    .addEventListener('submit', signupFormHandler);
-  
-  // Export the module to be used in other parts of the application
-  module.exports = {
-    loginFormHandler,
-    signupFormHandler,
-  };
-  
+  }
+};
+
+// Function: signupFormHandler
+// Description: Handles the submission of the signup form.
+//              Collects values from the form, sends a POST request to the '/api/users' endpoint,
+//              and redirects the browser to the profile page on success or displays an alert on failure.
+const signupFormHandler = async (event) => {
+  event.preventDefault();
+
+  const user_name = document.querySelector('#name-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
+
+  // console.log (JSON.stringify({ user_name, email, password }));
+
+  if (user_name && email && password) {
+     // alert (JSON.stringify({ user_name, email, password }));
+    // Send a POST request to the '/api/users' endpoint
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify({ user_name, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      // If the response is successful, redirect the browser to the profile page
+      document.location.replace('/');
+    } else {
+      //If the response is unsuccessful, display a prompt with the error message
+      const errorMessage = await response.text();
+      prompt('Error', errorMessage);
+    }
+  }
+};
+
+// Attach event listeners to the login forms
+document
+  .querySelector('#login-form')
+  .addEventListener('submit', loginFormHandler);
+  // Attach event listeners to the  signup forms
+document
+  .querySelector('#create-account-form')
+  .addEventListener('submit', signupFormHandler);
+
+// Export the module to be used in other parts of the application
+module.exports = {
+  loginFormHandler,
+  signupFormHandler,
+};

@@ -133,7 +133,7 @@ router.post('/login', async (req, res) => {
   try {
     // Find the user data in the database based on the provided email
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    res.sendStatus(200).json(req.session.user_id);
     if (!userData) {
       // If user data is not found, respond with an error message
       res.status(400).json({ message: 'Incorrect email or password, please try again' });

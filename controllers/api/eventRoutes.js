@@ -47,6 +47,7 @@ router.get('/event/:event_id', async (req, res) => {
 });
 // Get all events for a single user (by user_id = host_user_id)
 router.get('/:host_id', async (req, res) => {
+ 
     try {
         const eventData = await Event.findAll({
             where: { host_user_id: req.params.host_id },
