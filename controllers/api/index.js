@@ -13,5 +13,5 @@ router.use('/allergies', allergyRouters);
 router.use('/diets', dietRouters);
 router.use('/dishes', dishRouters);
 router.use('/map', mapRoutes);
-
+router.use('/map/allLocations', mapRoutes);
 module.exports = router;
