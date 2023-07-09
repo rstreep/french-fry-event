@@ -27,7 +27,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const axios= require('axios');
 // Set the port number for the server
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 5555;
 
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });

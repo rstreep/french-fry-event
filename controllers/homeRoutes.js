@@ -9,46 +9,10 @@ const { ff_event_guest_map, ff_event, ff_lookup, ff_menu, User} = require('../mo
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-      // only for debugging  
-      res.send ('Home page router!!!!')
-    // try {
-
-
-    //   // Get all blogs and JOIN with user data
-    //   const blogData = await Blog.findAll({
-    //     include: [
-    //       {
-    //         model: User,
-    //         attributes: ['user_name'],
-    //       },
-    //       {
-    //         model: Comment,
-    //         attributes: ['comment'],
-    //       },
-    //     ],
-    //   });
-  
-    //   // Serialize data so the template can read it
-    //   const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
-      // Convert undefined to false if req.session.logged_in is undefined
-      //const isLoggedIn = req.session.logged_in !== undefined ? req.session.logged_in : false;
-  
-    //   console.log(`Home page router!!!! ${JSON.stringify(blogs)}`);
-    //   console.log(`Session ID: ${JSON.stringify(req.session)}`);
-    //     const blogs = [];
-
-
-    // console.log("Home page router!!!!");
-
-    //   // Pass serialized data and session flag into template
-    //   res.render('homepage', { 
-    //     blogs, 
-    //     logged_in: isLoggedIn, //false, //req.session.logged_in 
-    //   });
-    // } catch (err) {
-    //   res.status(500).json(err);
-    // }
+    // res.send('homeRoutes');
+    res.render('homepage', {
+      logged_in: req.session.logged_in 
+    });
   });
 
   router.get('/login', (req, res) => {
