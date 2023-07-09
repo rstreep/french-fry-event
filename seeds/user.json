@@ -5,10 +5,6 @@
   "user_name": "johndoe",
   "email": "johndoe@example.com",
   "password": "password123",
-  "street_address": "123 Main St",
-  "city": "City",
-  "state": "State",
-  "zip": 12345,
   "created_date": "2023-06-29T00:00:00Z",
   "changed_date": "2023-06-29T00:00:00Z"
   },
@@ -18,10 +14,6 @@
   "user_name": "janesmith",
   "email": "janesmith@example.com",
   "password": "password456",
-  "street_address": "456 Elm St",
-  "city": "City",
-  "state": "State",
-  "zip": 67890,
   "created_date": "2023-06-29T00:00:00Z",
   "changed_date": "2023-06-29T00:00:00Z"
   }
