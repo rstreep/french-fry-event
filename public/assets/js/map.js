@@ -30,6 +30,8 @@ function onMapClick(e) {
     console.log('Marker Coordinates:', markerLat, markerLng);
     finalLat = markerLat;
     finalLong = markerLng;
+    document.getElementById("finalLat").value = finalLat ? finalLat.toFixed(6) : '';
+    document.getElementById("finalLong").value = finalLong ? finalLong.toFixed(6) : '';
     }
 
 // Add the click event listener to the map
@@ -47,16 +49,13 @@ async function postMapData(text, lat, lng) {
     console.log(response);
 };
 function displayModal(e) {
-    // if (e) {
-    //     document.querySelector("#lat").value = e.latlng.lat;
-    //     document.querySelector("#lng").value = e.latlng.lng;
-    // }
+
     var modal = document.querySelector("#modal1");
-    if (modal.dataset.state === "show") {
+    if (modal.dataset.state === "hidden") {
         modal.dataset.state = "hidden";
         modal.style.display = "none"; // Set display to "none" to hide the modal
     } else {
-    modal.dataset.state = "show";
+    modal.dataset.state = "hidden";
     modal.style.display = ""; // Reset display to its default value to show the modal
     }
     
