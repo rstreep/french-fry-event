@@ -45,6 +45,39 @@ router.get('/event/:event_id', async (req, res) => {
     }
 
 });
+router.put('/event/:event_id', async (req, res) => {
+    const eventId = req.params.event_id;
+    const updatedEventData = req.body;
+  
+    try {
+      const event = await Event.findByPk(eventId);
+  console.log(event);
+      if (!event) {
+        return res.status(404).json({ error: 'Event not found.' });
+      }
+  
+      // Update the event data
+      event.event_name = updatedEventData.event_name;
+      event.event_description = updatedEventData.event_description;
+      event.event_type = updatedEventData.event_type;
+      event.city = updatedEventData.city;
+      event.state = updatedEventData.state;
+      event.zip = updatedEventData.zip;
+      event.street_address = updatedEventData.street_address;
+      event.event_date = updatedEventData.event_date;
+  
+      // ... update other properties as needed
+  
+      // Save the updated event
+      await event.save();
+  
+      res.status(200).json(event);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred while updating the event.' });
+    }
+  });
+  
+  
 // Get all events for a single user (by user_id = host_user_id)
 router.get('/:host_id', async (req, res) => {
  

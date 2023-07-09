@@ -229,3 +229,98 @@ function submitForm(event) {
 const form = document.getElementById('form');
 // Call the submitForm function when submit
 form.addEventListener('submit', submitForm);
+
+var id;
+async function fetchData() {
+  try {
+  const response = await fetch(`/api/events`);
+  const data = await response.json();
+  console.log(data);
+  id = data[0].event_id;
+  return data[0];
+  } catch (error) {
+  console.log(error);
+  return null;
+  }
+  }
+  
+  function renderEventData(data) {
+  if (data) {
+  document.getElementById('event-name').value = data.event_name;
+  document.getElementById('event-description').value = data.event_description;
+  document.getElementById('event-type').value = data.event_type;
+  document.getElementById('street-address').value = data.street_address;
+  document.getElementById('city').value = data.city;
+  document.getElementById('state').value = data.state;
+  document.getElementById('zip-code').value = data.zip;
+  document.getElementById('event-date').value = data.event_date;
+  }
+  }
+  
+  async function getEventData() {
+  const eventData = await fetchData();
+  renderEventData(eventData);
+  }
+  
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Delay rendering for 5 minutes (300,000 milliseconds)
+    const delay = 100000;
+    const eventData = await getEventData();
+    setTimeout(async () => {
+    renderEventData(eventData);
+    }, delay);
+    });
+    
+    async function updateEventData(id, data) {
+      try {
+        console.log(id);
+        const response = await fetch(`/api/events/event/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log(response);
+        return response.ok;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const submitButton = document.getElementById('submit-btn');
+      const eventForm = document.getElementById('event-form');
+    
+      submitButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+    
+        const updatedData = {
+          id: id, 
+          event_name: document.getElementById('event-name').value,
+          event_description: document.getElementById('event-description').value,
+          event_type: document.getElementById('event-type').value,
+          street_address: document.getElementById('street-address').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          zip: document.getElementById('zip-code').value,
+          event_date: document.getElementById('event-date').value,
+        };
+    
+        // Call the updateEventData function
+        const success = await updateEventData(updatedData.id, updatedData);
+    
+        if (success) {
+          console.log('Event data updated successfully');
+          window.location.href="/preview";
+        } else {
+          console.log('Failed to update event data');
+        }
+    
+        // Clear form or display success message
+       
+        console.log('Form submitted successfully!');
+      });
+    });
+    
