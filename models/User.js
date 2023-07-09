@@ -60,24 +60,24 @@ User.init(
         len: [6]
       }
     },
-    street_address: {
-      type: DataTypes.STRING
-    },
-    // Event city field
-    city: {
-      type: DataTypes.STRING
-    },
-    // Event state field
-    state: {
-      type: DataTypes.STRING
-    },
-    // Event zip code field
-    zip: {
-      type: DataTypes.INTEGER,
-      validate: {
-        len: [5],
-      },
-    },
+    // street_address: {
+    //   type: DataTypes.STRING
+    // },
+    // // Event city field
+    // city: {
+    //   type: DataTypes.STRING
+    // },
+    // // Event state field
+    // state: {
+    //   type: DataTypes.STRING
+    // },
+    // // Event zip code field
+    // zip: {
+    //   type: DataTypes.INTEGER,
+    //   validate: {
+    //     len: [5],
+    //   },
+    // },
     // Created date field
     created_date: {
       type: DataTypes.DATE,
