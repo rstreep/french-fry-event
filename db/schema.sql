@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS familyfiesta_db;
-CREATE DATABASE familyfiesta_db;
+DROP DATABASE IF EXISTS familyfiesta1_db;
+CREATE DATABASE familyfiesta1_db;
 /* CREATE TABLE mapTable (
     map_id INTEGER PRIMARY KEY, 
     AUTO_INCREMENT,
