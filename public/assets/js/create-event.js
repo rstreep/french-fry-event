@@ -48,25 +48,25 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault(); 
 
       // Get input values
-      var event_Name = document.getElementById('event_name').value;
-      var event_Description = document.getElementById('event_description').value;
-      var event_Type = document.getElementById('event_type').value;
-      var street_Address = document.getElementById('street_address').value;
+      var event_name = document.getElementById('event_name').value;
+      var event_description = document.getElementById('event_description').value;
+      var event_type = document.getElementById('event_type').value;
+      var street_address = document.getElementById('street_address').value;
       var city = document.getElementById('city').value;
       var state = document.getElementById('state').value;
       var zip = document.getElementById('zip').value;
-      var event_Date = document.getElementById('event_date').value;
+      var event_date = document.getElementById('event_date').value;
 
       // Create newEventData object
       var newEventData = {
-        event_Name: event_Name,
-        event_Description: event_Description,
-        event_Type: event_Type,
-        street_Address: street_Address,
+        event_name: event_name,
+        event_description: event_description,
+        event_type: event_type,
+        street_address: street_address,
         city: city,
         state: state,
         zip: zip,
-        event_Date: event_Date,
+        event_date: event_date,
       };
 
       console.log(newEventData); 
