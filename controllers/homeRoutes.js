@@ -27,9 +27,27 @@ router.get('/', async (req, res) => {
     res.render('login');
   });
 
+  // router.get('/map', (req, res)=> {
+  //   res.render('map');
+  // })
 router.get('/map', (req, res) => {
-  res.render('map');
+  console.log(req.session.user_id)
+User.findOne({
+  where: {
+user_id: req.session.user_id
+  },
+  include: [{
+    model: Event
+  }]
 })
+.then(userData =>{
+  const user = userData.get({
+    plain: true
+  })
+  console.log(user)
+  res.render('map',{user});
+})
+});
 
 router.get('/create-event', async (req, res) => {
   res.render('create-event');
@@ -37,11 +55,6 @@ router.get('/create-event', async (req, res) => {
   //   logged_in: req.session.logged_in 
   // });
 });
-
-
-router.get('/map', (req, res) => {
-res.render('map');
-})
 
 router.get('/preview', (req, res)=> {
 res.render('preview');

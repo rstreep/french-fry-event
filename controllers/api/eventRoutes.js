@@ -79,6 +79,7 @@ router.get('/byguest/:guest_id', async (req, res) => {
 
 // Create a new event (without guests and menus)
 router.post('/', async (req, res) => {
+
     try {
         const eventData = await Event.create(req.body);
         res.status(200).json(eventData);
