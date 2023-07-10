@@ -31,7 +31,25 @@ router.get('/map', (req, res) => {
   res.render('map');
 })
 
+router.get('/login', (req, res) => {
+  // only for debugging  
+// res.send ('Login router!!!!');
+ // If the user is already logged in, redirect the request to another route
+ if (req.session.logged_in) {
+   res.redirect('/');
+   return;
+ }
 
+ res.render('login');
+});
+
+router.get('/map', (req, res) => {
+res.render('map');
+})
+
+router.get('/preview', (req, res)=> {
+res.render('preview');
+});
 
 ///////////////////////// - Example of possible routers - need models and seed implementation to complete/////////////////////////////////
 // /**
