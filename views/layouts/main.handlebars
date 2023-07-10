@@ -79,7 +79,8 @@
               <!-- Conditionally render login or logout links -->
               {{#if logged_in}}
               <li><a href="/profile">Dashboard</a></li>
-              <li><a href="/" id="logout">Log-out</a></li>
+              {{!-- <li><a href="/">Log-out</a></li> --}}
+              <button class="no-button" id="logout">logout</button>
               {{else}}
               <li><a href="/login">Login</a></li>
               {{/if}}
@@ -104,7 +105,7 @@
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}
-  <script src="/js/logout.js"></script>
+  <script src="/assets/js/logout.js"></script>
   {{/if}}
   {{!--
   <script src="/js/main.js"></script> --}}
