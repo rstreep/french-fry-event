@@ -23,7 +23,9 @@ const { Op } = require("sequelize");
   });
 
   router.get('/map', (req, res)=> {
-    res.render('map');
+    res.render('map', {
+      logged_in: req.session.logged_in
+    });
   })
 // router.get('/map', (req, res) => {
 //   res.render('map', {
