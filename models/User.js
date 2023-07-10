@@ -60,6 +60,7 @@ User.init(
         len: [6]
       }
     },
+    // Commented for POC implementation, will be added back in later
     // street_address: {
     //   type: DataTypes.STRING
     // },
