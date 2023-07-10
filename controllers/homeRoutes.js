@@ -22,11 +22,22 @@ const { Op } = require("sequelize");
     res.render('login');
   });
 
+  // router.get('/map', (req, res)=> {
+  //   res.render('map');
+  // })
 router.get('/map', (req, res) => {
   res.render('map', {
     logged_in: req.session.logged_in
   });
 })
+.then(userData =>{
+  const user = userData.get({
+    plain: true
+  })
+  console.log(user)
+  res.render('map',{user});
+})
+});
 
 router.get('/create-event', async (req, res) => {
   res.render('create-event', {
