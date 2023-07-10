@@ -1,114 +1,161 @@
-/**
- * User.js
- *
- * This module defines the User model, representing user data and authentication.
- * It exports the User model class, which can be used to interact with the users table in the database.
- */
-
-// Import Sequelize dependencies
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes,ValidationError } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
+const User = require('../models/User');
 
-// User model
-class User extends Model {
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
-}
 
-// Initialize User model
-User.init(
-  {
-    // User ID field
-    user_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true
-    },
-    // First name field
-    first_name: {
-      type: DataTypes.STRING
-    },
-    // Last name field
-    last_name: {
-      type: DataTypes.STRING
-    },
-    // User name field
-    user_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1, 15] // Minimum length of 1 and maximum length of 15
-      }
-    },
-    // Email field
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
-    },
-    // Password field
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [6]
-      }
-    },
-    street_address: {
-      type: DataTypes.STRING
-    },
-    // Event city field
-    city: {
-      type: DataTypes.STRING
-    },
-    // Event state field
-    state: {
-      type: DataTypes.STRING
-    },
-    // Event zip code field
-    zip: {
-      type: DataTypes.INTEGER,
-      validate: {
-        len: [5],
-      },
-    },
-    // Created date field
-    created_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    },
-    // Changed date field
-    changed_date: {
-      type: DataTypes.DATE
-    }
-  },
-  {
-    hooks: {
-      // Hashes the user's password before creating a new user
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-      // Hashes the user's password before updating an existing user
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
-      }
-    },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user'
-  }
-);
+// class MockUser extends Model {}
+// MockUser.init(
+//   {
+//     user_id: {
+//       type: DataTypes.INTEGER,
+//       autoIncrement: true,
+//       allowNull: false,
+//       primaryKey: true,
+//     },
+//     first_name: {
+//       type: DataTypes.STRING,
+//     },
+//     last_name: {
+//       type: DataTypes.STRING,
+//     },
+//     user_name: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//       validate: {
+//         len: [1, 15],
+//       },
+//     },
+//     email: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//       unique: true,
+//       validate: {
+//         isEmail: true,
+//       },
+//     },
+//     password: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//       validate: {
+//         len: [6],
+//       },
+//     },
+//     street_address: {
+//       type: DataTypes.STRING,
+//     },
+//     city: {
+//       type: DataTypes.STRING,
+//     },
+//     state: {
+//       type: DataTypes.STRING,
+//     },
+//     zip: {
+//       type: DataTypes.INTEGER,
+//       validate: {
+//         len: [5],
+//       },
+//     },
+//     created_date: {
+//       type: DataTypes.DATE,
+//       allowNull: false,
+//       defaultValue: DataTypes.NOW,
+//     },
+//     changed_date: {
+//       type: DataTypes.DATE,
+//     },
+//   },
+//   { sequelize, modelName: 'user' }
+// );
 
-// Export User model
-module.exports = User;
+// User.init(MockUser.init({}, { sequelize }));
+
+beforeAll(async () => {
+  await sequelize.sync();
+});
+
+afterAll(async () => {
+  await sequelize.close();
+});
+
+describe('User model', () => {
+  it('should create a new user with valid attributes', async () => {
+    const newUser = {
+      first_name: 'John',
+      last_name: 'Doe',
+      user_name: 'johndoe',
+      email: 'johndoe1@example.com',
+      password: 'password123',
+    };
+
+    const foundUser = await User.findOne({
+        where: {
+          first_name: newUser.first_name,
+          last_name: newUser.last_name,
+          user_name: newUser.user_name,
+          email: newUser.email,
+        },
+      });
+
+    if (foundUser) {
+        await foundUser.destroy();
+      }
+
+    const createdUser = await User.create(newUser);
+
+    expect(createdUser.first_name).toBe(newUser.first_name);
+    expect(createdUser.last_name).toBe(newUser.last_name);
+    expect(createdUser.user_name).toBe(newUser.user_name);
+    expect(createdUser.email).toBe(newUser.email);
+    expect(createdUser.password).not.toBe(newUser.password);
+    
+  });
+
+  it('should fail to create a new user with an invalid user_name', async () => {
+    const newUser = {
+      first_name: 'John',
+      last_name: 'Doe',
+      user_name: '', // Invalid: Empty string
+      email: 'johndoe@example.com',
+      password: 'password123',
+    };
+
+    await expect(User.create(newUser)).rejects.toThrow(ValidationError);
+  });
+
+  it('should fail to create a new user with an invalid email', async () => {
+    const newUser = {
+      first_name: 'John',
+      last_name: 'Doe',
+      user_name: 'johndoe',
+      email: 'invalidemail', // Invalid: Not a valid email address
+      password: 'password123',
+    };
+
+    await expect(User.create(newUser)).rejects.toThrow(ValidationError);
+  });
+
+  it('should fail to create a new user with a short password', async () => {
+    const newUser = {
+      first_name: 'John',
+      last_name: 'Doe',
+      user_name: 'johndoe',
+      email: 'johndoe@example.com',
+      password: '123', // Invalid: Less than 6 characters
+    };
+
+    await expect(User.create(newUser)).rejects.toThrow(ValidationError);
+  });
+
+  it('should fail to create a new user with a long user_name', async () => {
+    const newUser = {
+      first_name: 'John',
+      last_name: 'Doe',
+      user_name: 'thisusernamewillbetooolong', // Invalid: More than 15 characters
+      email: 'johndoe@example.com',
+      password: 'password123',
+    };
+
+    await expect(User.create(newUser)).rejects.toThrow(ValidationError);
+  });
+});

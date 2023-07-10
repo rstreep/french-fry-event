@@ -24,6 +24,91 @@
 //   })
 
 // Get Menu API
+document.addEventListener('DOMContentLoaded', function() {
+    var tabs = document.querySelectorAll('.tabs');
+    M.Tabs.init(tabs);
+  });
+
+  async function postNewEventData() {
+    const response = await fetch(`/api/map`, {
+        method: 'POST',
+        body: JSON.stringify({}),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    console.log(response);
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('event-form');
+    var submitBtn = document.getElementById('submit-btn');
+
+    submitBtn.addEventListener('click', function(event) {
+      event.preventDefault(); 
+
+      // Get input values
+      var event_name = document.getElementById('event_name').value;
+      var event_description = document.getElementById('event_description').value;
+      var event_type = document.getElementById('event_type').value;
+      var street_address = document.getElementById('street_address').value;
+      var city = document.getElementById('city').value;
+      var state = document.getElementById('state').value;
+      var zip = document.getElementById('zip').value;
+      var event_date = document.getElementById('event_date').value;
+
+      // Create newEventData object
+      var newEventData = {
+        event_name: event_name,
+        event_description: event_description,
+        event_type: event_type,
+        street_address: street_address,
+        city: city,
+        state: state,
+        zip: zip,
+        event_date: event_date,
+      };
+
+      console.log(newEventData); 
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var addBtn = document.getElementById('add-guest-btn');
+    var guestList = document.getElementById('guest-list');
+    var guests = [];
+
+    addBtn.addEventListener('click', function(guest) {
+      event.preventDefault();
+
+      var guestFirstName = document.getElementById('guestFName').value;
+      var guestLastName = document.getElementById('guestLName').value;
+
+      var guest = {
+        firstName: guestFirstName,
+        lastName: guestLastName,
+      };
+
+      guests.push(guest);
+
+      document.getElementById('guestFName').value = '';
+      document.getElementById('guestLName').value = '';
+
+      renderGuestList(guest);
+
+      console.log(guests);
+    });
+
+    function renderGuestList(guest) {
+      guestList.innerHTML = '';
+
+      guests.forEach(function(guest) {
+        var guestItem = document.createElement('div');
+        guestItem.textContent = guest.firstName + ' ' + guest.lastName;
+        guestList.appendChild(guestItem);
+      });
+    }
+  });
 
 var apiID = "e0e48aa8";
 var apiKey = "5ecc0a6a74140b8afe687fc73be0ddb2";
@@ -114,28 +199,5 @@ genBtn.onclick = function () {
 
             console.log(menu);
         });
+        
     };
-// let appetizer1 = document.querySelector('#app1');
-    // let appetizer2 = document.querySelector('#app2');
-    // let entree1 = document.querySelector('#ent1');
-    // let entree2 = document.querySelector('#ent2');
-    // let dessert1 = document.querySelector('#des1');
-    // let dessert2 = document.querySelector('#des2');
-
-    // let app1 = appetizer1.value;
-    // let app2 = appetizer2.value;
-    // let ent1 = entree1.value;
-    // let ent2 = entree2.value;
-    // let des1 = dessert1.value;
-    // let des2 = dessert2.value;
-
-    // const menu = {
-    //     app_option_1: app1.recipe.label,
-    //     app_option_2: app2,
-    //     ent_option_1: ent1,
-    //     ent_option_2: ent2,
-    //     des_option_1: des1,
-    //     des_option_2: des2
-    // }
-
-    // console.log(menu);
