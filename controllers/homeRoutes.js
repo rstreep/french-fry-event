@@ -38,8 +38,6 @@ router.get('/create-event', async (req, res) => {
   // });
 });
 
- res.render('login');
-
 
 router.get('/map', (req, res) => {
 res.render('map');
