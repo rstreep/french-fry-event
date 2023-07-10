@@ -54,22 +54,22 @@ router.get('/user-profile', (req, res)=> {
 
   // Get New Events
 
-  router.get('/', ansync (req, res) =>{
-    const eventDataNew  = await Event.findall({
-      include: [User, Guest, Menu],
-      order: [['event_date','ASC']],
-   });
-   const eventsNEW = eventDataNEW.map((event) => event.get({plan:true}));
-   try {
-    res.render('homepage',{
-      eventsNEW,
-      events
-    })
-   }
+  // router.get('/', ansync (req, res) => {
+  //   const eventDataNew  = await Event.findall({
+  //     include: [User, Guest, Menu],
+  //     order: [['event_date','ASC']],
+  //  });
+  //  const eventsNEW = eventDataNEW.map((event) => event.get({plan:true}));
+  //  try {
+  //   res.render('homepage',{
+  //     eventsNEW,
+  //     events
+  //   })
+  //  }
 
 
 
-  });
+  // });
 
 
   // Get Old Events
