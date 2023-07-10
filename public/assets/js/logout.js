@@ -15,7 +15,6 @@ const logout = async () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
-  
     if (response.ok) {
       // If the response is successful, redirect the user to the homepage
       document.location.replace('/');

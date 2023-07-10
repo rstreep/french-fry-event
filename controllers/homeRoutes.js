@@ -31,6 +31,12 @@ router.get('/map', (req, res) => {
   res.render('map');
 })
 
+router.get('/create-event', async (req, res) => {
+  res.render('create-event');
+  // res.render('homepage', {
+  //   logged_in: req.session.logged_in 
+  // });
+});
 
 
 ///////////////////////// - Example of possible routers - need models and seed implementation to complete/////////////////////////////////
