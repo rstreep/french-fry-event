@@ -23,12 +23,14 @@ const { Op } = require("sequelize");
   });
 
 router.get('/map', (req, res) => {
-  res.render('map');
+  res.render('map', {
+    logged_in: req.session.logged_in
+  });
 })
 
 router.get('/create-event', async (req, res) => {
   res.render('create-event', {
-    
+    logged_in: req.session.logged_in
   });
   // res.render('homepage', {
   //   logged_in: req.session.logged_in 
@@ -36,12 +38,14 @@ router.get('/create-event', async (req, res) => {
 });
 
 
-router.get('/map', (req, res) => {
-res.render('map');
-});
+// router.get('/map', (req, res) => {
+// res.render('map');
+// });
 
 router.get('/preview', (req, res)=> {
-res.render('preview');
+res.render('preview', {
+  logged_in: req.session.logged_in
+});
 });
 
 /** 
