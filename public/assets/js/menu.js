@@ -110,12 +110,11 @@ genBtn.onclick = function () {
             // document.querySelector('#des2').insertAdjacentHTML("afterbegin", menu.des2);
             document.querySelector('#des1').innerHTML = `<a href="${menu.des1_link}">${menu.des1_name}</a>`;
             document.querySelector('#des2').innerHTML = `<a href="${menu.des2_link}">${menu.des2_name}</a>`;
-            
+            document.getElementById("nextBtn").classList.remove("hide");
+
+            console.log(menu);
         });
-
-        console.log(menu);
-};
-
+    };
 // let appetizer1 = document.querySelector('#app1');
     // let appetizer2 = document.querySelector('#app2');
     // let entree1 = document.querySelector('#ent1');
