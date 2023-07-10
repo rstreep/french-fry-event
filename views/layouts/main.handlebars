@@ -46,8 +46,12 @@
           margin-bottom: 20px;
         }
 
-        #nextBtn a{
+        #nextBtn a {
           color: white !important;
+        }
+
+        #save-guest-btn {
+
         }
 
         .hide {
@@ -64,6 +68,11 @@
           display: flex;
           justify-content: space-around;
           margin-top: 20px;
+        }
+
+        .cards-container .card {
+          width: 32%;
+          min-height: 350px;
         }
 
         .custom-card {
@@ -87,12 +96,6 @@
         }
       </style>
       <div class="navbar-fixed">
-        <ul id="dropdown1" class="dropdown-content">
-          <li><a href="#!">example</a></li>
-          <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li>
-        </ul>
         <nav>
           <div class="nav-wrapper red">
             <a href="#" class="brand-logo center">Family<span class="blue-text text-lighten-3"> ★ </span>Fiesta</a>
@@ -131,6 +134,15 @@
   {{/if}}
   {{!--
   <script src="/js/main.js"></script> --}}
+  <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdowns = document.querySelectorAll('.dropdown-trigger')
+      for (var i = 0; i < dropdowns.length; i++) {
+        M.Dropdown.init(dropdowns[i]);
+      }
+    });
+  </script>
 </body>
 
 </html>

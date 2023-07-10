@@ -7,12 +7,18 @@
 const router = require('express').Router();
 const {Event, User, Dish, Menu, Guest} = require('../models');
 const withAuth = require('../utils/auth');
-const { Op } = require("sequelize");
+
+router.get('/', async (req, res) => {
+    // res.send('homeRoutes');
+    res.render('homepage', {
+      logged_in: req.session.logged_in 
+    });
+  });
 
   router.get('/login', (req, res) => {
      // only for debugging  
    // res.send ('Login router!!!!');
-    console.log(req.session.logged_in);
+
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
       res.redirect('/');
@@ -27,9 +33,7 @@ router.get('/map', (req, res) => {
 })
 
 router.get('/create-event', async (req, res) => {
-  res.render('create-event', {
-    
-  });
+  res.render('create-event');
   // res.render('homepage', {
   //   logged_in: req.session.logged_in 
   // });
@@ -40,76 +44,68 @@ router.get('/map', (req, res) => {
 res.render('map');
 });
 
+
+
 router.get('/preview', (req, res)=> {
 res.render('preview');
 });
 
-/** 
+ 
 router.get('/user-profile', (req, res)=> {
   res.render('user-profile');
 }); 
-*/
-  // Get Card Images
-  // router.get('/', async (req, res) => {
-  //   let images=[
-  //     {
-  //       image: "/assets/images/pexels-fauxels-3184188.jpg"
-  //     },
-  //     {
-  //       image: "/assets/images/pexels-rachel-claire-4819705.jpg"
-  //     },
-  //     {
-  //       image: "/assets/images/pexels-rachel-claire-4819714.jpg"
-  //     }
-  //   ]
-  //   res.render('index' , {images});
-  // });
 
+  // Get Card Images
+  router.get('/', async (req, res) => {
+    let images=[
+      {
+        image: "/assets/images/pexels-fauxels-3184188.jpg"
+      },
+      {
+        image: "/assets/images/pexels-rachel-claire-4819705.jpg"
+      },
+      {
+        image: "/assets/images/pexels-rachel-claire-4819714.jpg"
+      }
+    ]
+    res.render('index' , {images});
+  });
+  
   // Get New Events
   router.get('/', async (req, res) => {
-    const eventDataNew  = await Event.findAll({
+    const eventDataNew  = await Event.findall({
       limit: 3,
       include: [User, Guest, Menu],
       order: [['event_date','ASC']],
    });
    const eventsNEW = eventDataNew.map((event) => event.get({plan:true}));
-   let images=[
-        {
-          image: "/assets/images/pexels-fauxels-3184188.jpg"
-        },
-        {
-          image: "/assets/images/pexels-rachel-claire-4819705.jpg"
-        },
-        {
-          image: "/assets/images/pexels-rachel-claire-4819714.jpg"
-        }
-      ]
+ 
    // Get Old Events
-   const eventDataOld = await Event.findAll({
+   const eventDataOld = await Event.findall({
       include: [User,Guest,Menu],
       where: { event_date: {
-        [Op.lt]: new Date().toString()
+        [Op.lt]: now.endOf('day').toString()
       }
      },
-      order: [['event_date','ASC']],
+      order: [['event_Date','ASC']],
    });
    const eventsOLD = eventDataOld.map((event) => event.get({plan:true}));
+
    // Get Events Where I am Host
-   const eventDataHost= await Event.findAll({
+   const eventDataHost= await Event.findall({
     include: [User,Guest,Menu],
     host_user_id: req.params.host_id,
-    order: [['event_date','DESC']],
+    order: [['event_Date','ASC']],
     });
  const eventsHOST = eventDataHost.map((event) => event.get({plan:true}));
 
-    console.log(images)
+
    try {
     res.render('homepage',{
       eventsNEW,
       eventsOLD,
-      eventsHOST, 
-      images,
-      logged_in: req.session.logged_in 
+      eventsHOST
+      //logged_in: isLoggedIn
     });
 
    } catch (err) {
