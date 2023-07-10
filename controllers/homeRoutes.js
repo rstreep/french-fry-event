@@ -5,7 +5,7 @@
  * It exports an Express router with the defined routes.
  */
 const router = require('express').Router();
-const { ff_event_guest_map, ff_event, ff_lookup, ff_menu, User} = require('../models');
+const {Event, User, Dish, Menu, Guest} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
   router.get('/login', (req, res) => {
      // only for debugging  
    // res.send ('Login router!!!!');
+
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
       res.redirect('/');
@@ -46,6 +47,35 @@ res.render('map');
 router.get('/preview', (req, res)=> {
 res.render('preview');
 });
+
+router.get('/user-profile', (req, res)=> {
+  res.render('user-profile');
+  }); 
+
+  // Get New Events
+
+  router.get('/', ansync (req, res) =>{
+    const eventDataNew  = await Event.findall({
+      include: [User, Guest, Menu],
+      order: [['event_date','ASC']],
+   });
+   const eventsNEW = eventDataNEW.map((event) => event.get({plan:true}));
+   try {
+    res.render('homepage',{
+      eventsNEW,
+      events
+    })
+   }
+
+
+
+  });
+
+
+  // Get Old Events
+
+
+  // Get Events where User is Host
 
 ///////////////////////// - Example of possible routers - need models and seed implementation to complete/////////////////////////////////
 // /**
