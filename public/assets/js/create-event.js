@@ -24,91 +24,114 @@
 //   })
 
 // Get Menu API
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var tabs = document.querySelectorAll('.tabs');
     M.Tabs.init(tabs);
-  });
+});
 
-  async function postNewEventData() {
-    const response = await fetch(`/api/map`, {
+async function postNewEventData() {
+    const response = await fetch(`/api/events`, {
         method: 'POST',
-        body: JSON.stringify({}),
+        body: JSON.stringify({ event_name: event_name, event_description: event_description, event_type: event_type, street_address: street_address, city: city, state: state, zip: zip, event_date: event_date }),
         headers: {
             'Content-Type': 'application/json',
         },
     })
     console.log(response);
-  };
+};
 
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var form = document.getElementById('event-form');
     var submitBtn = document.getElementById('submit-btn');
 
-    submitBtn.addEventListener('click', function(event) {
-      event.preventDefault(); 
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        alert('working');
 
-      // Get input values
-      var event_name = document.getElementById('event_name').value;
-      var event_description = document.getElementById('event_description').value;
-      var event_type = document.getElementById('event_type').value;
-      var street_address = document.getElementById('street_address').value;
-      var city = document.getElementById('city').value;
-      var state = document.getElementById('state').value;
-      var zip = document.getElementById('zip').value;
-      var event_date = document.getElementById('event_date').value;
+        // Get input values
+        var event_name = document.getElementById('event_name').value;
+        var event_description = document.getElementById('event_description').value;
+        var event_type = document.getElementById('event_type').value;
+        var street_address = document.getElementById('street_address').value;
+        var city = document.getElementById('city').value;
+        var state = document.getElementById('state').value;
+        var zip = document.getElementById('zip').value;
+        var event_date = document.getElementById('event_date').value;
+        const dateObject = new Date(event_date);
+        // const parsedInt = parseInt(zip, 5);
+        const constructedNumber = Number(zip);
 
-      // Create newEventData object
-      var newEventData = {
-        event_name: event_name,
-        event_description: event_description,
-        event_type: event_type,
-        street_address: street_address,
-        city: city,
-        state: state,
-        zip: zip,
-        event_date: event_date,
-      };
+        // Create newEventData object
+        var newEventData = {
+            event_name: event_name,
+            event_description: event_description,
+            event_type: event_type,
+            street_address: street_address,
+            city: city,
+            state: state,
+            zip: constructedNumber,
+            // event_date: event_date,
+            event_date: dateObject,
+            host_user_id: 1
+        };
 
-      console.log(newEventData); 
+        if (event_name && event_description && event_type && street_address && city && state && zip && event_date) {
+            // Send a POST request to the '/api/users/login' endpoint
+            const response = await fetch('/api/events', {
+                method: 'POST',
+                body: JSON.stringify({ newEventData }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            if (response.ok) {
+                // If the response is successful, redirect the browser to the profile page
+                //   document.location.replace('/');
+            } else {
+                // If the response is unsuccessful, display an alert with the error message
+                const errorMessage = await response.text();
+                prompt('Error', errorMessage);
+            }
+        }
+
+        console.log(JSON.stringify({newEventData}));
     });
-  });
+});
 
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var addBtn = document.getElementById('add-guest-btn');
     var guestList = document.getElementById('guest-list');
     var guests = [];
 
-    addBtn.addEventListener('click', function(guest) {
-      event.preventDefault();
+    addBtn.addEventListener('click', function (guest) {
+        event.preventDefault();
 
-      var guestFirstName = document.getElementById('guestFName').value;
-      var guestLastName = document.getElementById('guestLName').value;
+        var guestFirstName = document.getElementById('guestFName').value;
+        var guestLastName = document.getElementById('guestLName').value;
 
-      var guest = {
-        firstName: guestFirstName,
-        lastName: guestLastName,
-      };
+        var guest = {
+            firstName: guestFirstName,
+            lastName: guestLastName,
+        };
 
-      guests.push(guest);
+        guests.push(guest);
 
-      document.getElementById('guestFName').value = '';
-      document.getElementById('guestLName').value = '';
+        document.getElementById('guestFName').value = '';
+        document.getElementById('guestLName').value = '';
 
-      renderGuestList(guest);
+        renderGuestList(guest);
 
-      console.log(guests);
+        console.log(guests);
     });
 
     function renderGuestList(guest) {
-      guestList.innerHTML = '';
+        guestList.innerHTML = '';
 
-      guests.forEach(function(guest) {
-        var guestItem = document.createElement('div');
-        guestItem.textContent = guest.firstName + ' ' + guest.lastName;
-        guestList.appendChild(guestItem);
-      });
+        guests.forEach(function (guest) {
+            var guestItem = document.createElement('div');
+            guestItem.textContent = guest.firstName + ' ' + guest.lastName;
+            guestList.appendChild(guestItem);
+        });
     }
-  });
+});
 
 var apiID = "e0e48aa8";
 var apiKey = "5ecc0a6a74140b8afe687fc73be0ddb2";
@@ -199,5 +222,5 @@ genBtn.onclick = function () {
 
             console.log(menu);
         });
-        
-    };
+
+};

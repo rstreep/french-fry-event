@@ -1,28 +1,33 @@
+.container container-fluid mt-5 {
+    margin: 0;
+    padding: 0;
+}
+
 .event-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: space-between;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
 
 }
 
 .event-container .eventcard {
-    width: 32%;
-    min-height: 300px;
+    width: 32% !important;
+    min-height: 300px !important;
 }
 
 .userprofile .card {
-    width: 49%;
-    min-height: 300px;
+    width: 49% !important;
+    min-height: 300px !important;
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 
     .event-container .eventcard {
-        width: 49%;
-        min-height: 300px;
+        width: 49% !important;
+        min-height: 300px !important;
     }
     }
 
