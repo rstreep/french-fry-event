@@ -18,20 +18,20 @@
           <div id="tab1">
             <span class="card-title">Event Info</span>
                 <div class="input-field col s12">
-                  <input id="event-name" type="text" class="validate">
-                  <label for="event-name">Event Name</label>
+                  <input id="event_name" type="text" class="validate">
+                  <label for="event_name">Event Name</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="event-description" type="text" class="validate">
-                  <label for="event-description">Event Description</label>
+                  <input id="event_description" type="text" class="validate">
+                  <label for="event_description">Event Description</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="event-type" type="text" class="validate">
-                  <label for="event-type">Event Type</label>
+                  <input id="event_type" type="text" class="validate">
+                  <label for="event_type">Event Type</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="street-address" type="text" class="validate">
-                  <label for="street-address">Street Address</label>
+                  <input id="street_address" type="text" class="validate">
+                  <label for="street_address">Street Address</label>
                 </div>
                 <div class="input-field col s12">
                   <input id="city" type="text" class="validate">
@@ -42,17 +42,17 @@
                   <label for="state">State</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="zip-code" type="text" class="validate">
-                  <label for="zip-code">Zip Code</label>
+                  <input id="zip" type="text" class="validate">
+                  <label for="zip">Zip Code</label>
                 </div>
                 <div class="input-field col s12">
-                  <input id="event-date" type="text" class="validate">
-                  <label for="event-date">Date</label>
+                  <input id="event_date" type="text" class="validate">
+                  <label for="event_date">Date</label>
                 </div>
-                <div class="input-field col s12">
-                  <input id="event-time" type="text" class="validate">
-                  <label for="event-time">Time of Day</label>
-                </div>
+                {{!-- <div class="input-field col s12">
+                  <input id="event_time" type="text" class="validate">
+                  <label for="event_time">Time of Day</label>
+                </div> --}}
                 <button class="btn waves-effect waves-light red" type="submit" id="submit-btn">Submit</button>
                 <div class="row">
                 </div>
@@ -98,6 +98,7 @@
                       <li id="des2"></li>
                   </ul>
               </div>
+              <button id="nextBtn" class="btn waves-effect waves-light red hide"><a href="/map">Next</a></button>
               </div>
             <div class="row">
             </div>
@@ -110,83 +111,4 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="/assets/js/menu.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var tabs = document.querySelectorAll('.tabs');
-      M.Tabs.init(tabs);
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var form = document.getElementById('event-form');
-      var submitBtn = document.getElementById('submit-btn');
-
-      submitBtn.addEventListener('click', function(event) {
-        event.preventDefault(); 
-
-        // Get input values
-        var eventName = document.getElementById('event-name').value;
-        var eventDescription = document.getElementById('event-description').value;
-        var eventType = document.getElementById('event-type').value;
-        var streetAddress = document.getElementById('street-address').value;
-        var city = document.getElementById('city').value;
-        var state = document.getElementById('state').value;
-        var zipCode = document.getElementById('zip-code').value;
-        var eventDate = document.getElementById('event-date').value;
-        var eventTime = document.getElementById('event-time').value;
-
-        // Create newEventData object
-        var newEventData = {
-          eventName: eventName,
-          eventDescription: eventDescription,
-          eventType: eventType,
-          streetAddress: streetAddress,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          eventDate: eventDate,
-          eventTime: eventTime
-        };
-
-        console.log(newEventData); 
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var addBtn = document.getElementById('add-guest-btn');
-      var guestList = document.getElementById('guest-list');
-      var guests = [];
-
-      addBtn.addEventListener('click', function(guest) {
-        event.preventDefault();
-
-        var guestFirstName = document.getElementById('guestFName').value;
-        var guestLastName = document.getElementById('guestLName').value;
-
-        var guest = {
-          firstName: guestFirstName,
-          lastName: guestLastName,
-        };
-
-        guests.push(guest);
-
-        document.getElementById('guestFName').value = '';
-        document.getElementById('guestLName').value = '';
-
-        renderGuestList(guest);
-
-        console.log(guests);
-      });
-
-      function renderGuestList(guest) {
-        guestList.innerHTML = '';
-
-        guests.forEach(function(guest) {
-          var guestItem = document.createElement('div');
-          guestItem.textContent = guest.firstName + ' ' + guest.lastName;
-          guestList.appendChild(guestItem);
-        });
-      }
-    });
-
-  </script>
+  <script src="/assets/js/create-event.js"></script>
