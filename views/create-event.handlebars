@@ -133,6 +133,7 @@
         var state = document.getElementById('state').value;
         var zipCode = document.getElementById('zip-code').value;
         var eventDate = document.getElementById('event-date').value;
+        var eventTime = document.getElementById('event-time').value;
 
         // Create newEventData object
         var newEventData = {
@@ -143,7 +144,8 @@
           city: city,
           state: state,
           zipCode: zipCode,
-          eventDate: eventDate
+          eventDate: eventDate,
+          eventTime: eventTime
         };
 
         console.log(newEventData); 

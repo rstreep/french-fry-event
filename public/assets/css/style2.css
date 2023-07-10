@@ -1,4 +1,4 @@
-.cards-container {
+.event-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -7,6 +7,23 @@
 
 }
 
-.cards-container .card {
+.event-container .eventcard {
     width: 32%;
+    min-height: 300px;
 }
+
+.userprofile .card {
+    width: 49%;
+    min-height: 300px;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .event-container .eventcard {
+        width: 49%;
+        min-height: 300px;
+    }
+    }
+
+/*test*/

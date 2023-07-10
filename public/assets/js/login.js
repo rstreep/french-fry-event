@@ -47,15 +47,17 @@ const loginFormHandler = async (event) => {
     const user_name = document.querySelector('#name-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+    const first_name = document.querySelector('#fname-signup').value.trim();
+    const last_name = document.querySelector('#lname-signup').value.trim();
   
-    console.log (JSON.stringify({ user_name, email, password }));
+    console.log (JSON.stringify({ user_name, email, password, first_name, last_name }));
 
     if (user_name && email && password) {
        // alert (JSON.stringify({ user_name, email, password }));
       // Send a POST request to the '/api/users' endpoint
       const response = await fetch('/api/users', {
         method: 'POST',
-        body: JSON.stringify({ user_name, email, password }),
+        body: JSON.stringify({ user_name, email, password, first_name, last_name }),
         headers: { 'Content-Type': 'application/json' },
       });
   
