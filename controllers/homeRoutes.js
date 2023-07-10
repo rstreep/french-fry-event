@@ -31,17 +31,15 @@ router.get('/map', (req, res) => {
   res.render('map');
 })
 
-router.get('/login', (req, res) => {
-  // only for debugging  
-// res.send ('Login router!!!!');
- // If the user is already logged in, redirect the request to another route
- if (req.session.logged_in) {
-   res.redirect('/');
-   return;
- }
+router.get('/create-event', async (req, res) => {
+  res.render('create-event');
+  // res.render('homepage', {
+  //   logged_in: req.session.logged_in 
+  // });
+});
 
  res.render('login');
-});
+
 
 router.get('/map', (req, res) => {
 res.render('map');
