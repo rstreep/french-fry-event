@@ -17,6 +17,7 @@
         <div class="card-content center">
           <div id="tab1">
             <span class="card-title">Event Info</span>
+<<<<<<< HEAD
             <div class="input-field col s12">
               <input id="event-name" type="text" class="validate">
               <label for="event-name">Event Name</label>
@@ -56,6 +57,47 @@
             <button class="btn waves-effect waves-light red" type="submit" id="submit-btn">Submit</button>
             <div class="row">
             </div>
+=======
+                <div class="input-field col s12">
+                  <input id="event_name" type="text" class="validate">
+                  <label for="event_name">Event Name</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event_description" type="text" class="validate">
+                  <label for="event_description">Event Description</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event_type" type="text" class="validate">
+                  <label for="event_type">Event Type</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="street_address" type="text" class="validate">
+                  <label for="street_address">Street Address</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="city" type="text" class="validate">
+                  <label for="city">City</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="state" type="text" class="validate">
+                  <label for="state">State</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="zip" type="text" class="validate">
+                  <label for="zip">Zip Code</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="event_date" type="text" class="validate">
+                  <label for="event_date">Date</label>
+                </div>
+                {{!-- <div class="input-field col s12">
+                  <input id="event_time" type="text" class="validate">
+                  <label for="event_time">Time of Day</label>
+                </div> --}}
+                <button class="btn waves-effect waves-light red" type="submit" id="submit-btn">Submit</button>
+                <div class="row">
+                </div>
+>>>>>>> 664281161f3f9b90e8d01e79b2c36ee568a1261b
           </div>
           <div id="tab2">
             <span class="card-title">Invite Guests</span>
@@ -78,25 +120,29 @@
           <div id="tab3">
             <span class="card-title">Create Menu</span>
             <div class="menuCriteria col s12">
-              <input type="search" id="userSearch" placeholder="Enter Entree here...">
-            </div>
-            <div class="menuOutput">
-              <button class="btn waves-effect waves-light red" id="generate">Create Menu</button>
-              <h4>Appetizer</h4>
-              <ul class="menu col s12">
-                <li id="app1"></li>
-                <li id="app2"></li>
-              </ul>
-              <h4>Entree</h4>
-              <ul>
-                <li id="ent1"></li>
-                <li id="ent2"></li>
-              </ul>
-              <h4>Dessert</h4>
-              <ul>
-                <li id="des1"></li>
-                <li id="des2"></li>
-              </ul>
+              <input type="search" id="userSearch" placeholder="Enter Entree here...">            
+              </div>
+              <div class="menuOutput">
+                  <button class="btn waves-effect waves-light red" id="generate">Create Menu</button>
+                  <h4>Appetizer</h4>
+                  <ul class="menu col s12">
+                      <li id="app1"></li>
+                      <li id="app2"></li>
+                  </ul>
+                  <h4>Entree</h4>
+                  <ul>
+                      <li id="ent1"></li>
+                      <li id="ent2"></li>
+                  </ul>
+                  <h4>Dessert</h4>
+                  <ul>
+                      <li id="des1"></li>
+                      <li id="des2"></li>
+                  </ul>
+              </div>
+              <button id="nextBtn" class="btn waves-effect waves-light red hide"><a href="/map">Next</a></button>
+              </div>
+            <div class="row">
             </div>
           </div>
           <div class="row">
@@ -109,13 +155,16 @@
 </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="/assets/js/menu.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var tabs = document.querySelectorAll('.tabs');
-    M.Tabs.init(tabs);
-  });
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="/assets/js/menu.js"></script>
+  <script>
+
+    
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var tabs = document.querySelectorAll('.tabs');
+      M.Tabs.init(tabs);
+    });
 
   document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('event-form');
@@ -123,28 +172,27 @@
 
      submitBtn.addEventListener('click', function(event) {
         event.preventDefault(); 
-      // Get input values
-      var eventName = document.getElementById('event-name').value;
-        var eventDescription = document.getElementById('event-description').value;
-        var eventType = document.getElementById('event-type').value;
-        var streetAddress = document.getElementById('street-address').value;
+
+        // Get input values
+        var eventName = document.getElementById('event_name').value;
+        var eventDescription = document.getElementById('event_description').value;
+        var eventType = document.getElementById('event_type').value;
+        var streetAddress = document.getElementById('street_address').value;
         var city = document.getElementById('city').value;
         var state = document.getElementById('state').value;
-        var zipCode = document.getElementById('zip-code').value;
-        var eventDate = document.getElementById('event-date').value;
-        var eventTime = document.getElementById('event-time').value;
-  
-      // Create newEventData object
-       var newEventData = {
-          eventName: eventName,
-          eventDescription: eventDescription,
-          eventType: eventType,
-          streetAddress: streetAddress,
+        var zipCode = document.getElementById('zip').value;
+        var eventDate = document.getElementById('event_date').value;
+
+        // Create newEventData object
+        var newEventData = {
+          event_Name: eventName,
+          event_Description: eventDescription,
+          event_Type: eventType,
+          street_Address: streetAddress,
           city: city,
           state: state,
-          zipCode: zipCode,
-          eventDate: eventDate,
-          eventTime: eventTime
+          zip: zipCode,
+          event_Date: eventDate,
         };
      
       console.log(newEventData); 

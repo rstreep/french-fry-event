@@ -5,7 +5,7 @@
  * It exports an Express router with the defined routes.
  */
 const router = require('express').Router();
-const { ff_event_guest_map, ff_event, ff_lookup, ff_menu, User} = require('../models');
+const {Event, User, Dish, Menu, Guest} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
   router.get('/login', (req, res) => {
      // only for debugging  
    // res.send ('Login router!!!!');
+
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
       res.redirect('/');
@@ -59,6 +60,72 @@ router.get('/create-event', async (req, res) => {
 router.get('/preview', (req, res)=> {
 res.render('preview');
 });
+
+/** 
+router.get('/user-profile', (req, res)=> {
+  res.render('user-profile');
+}); 
+*/
+  // Get Card Images
+  router.get('/', async (req, res) => {
+    let images=[
+      {
+        image: "/assets/images/pexels-fauxels-3184188.jpg"
+      },
+      {
+        image: "/assets/images/pexels-rachel-claire-4819705.jpg"
+      },
+      {
+        image: "/assets/images/pexels-rachel-claire-4819714.jpg"
+      }
+    ]
+    res.render('index' , {images});
+  });
+  
+  // Get New Events
+  router.get('/', async (req, res) => {
+    const eventDataNew  = await Event.findall({
+      limit: 3,
+      include: [User, Guest, Menu],
+      order: [['event_date','ASC']],
+   });
+   const eventsNEW = eventDataNew.map((event) => event.get({plan:true}));
+ 
+   // Get Old Events
+   const eventDataOld = await Event.findall({
+      include: [User,Guest,Menu],
+      where: { event_date: {
+        [Op.lt]: now.endOf('day').toString()
+      }
+     },
+      order: [['event_Date','ASC']],
+   });
+   const eventsOLD = eventDataOld.map((event) => event.get({plan:true}));
+
+   // Get Events Where I am Host
+   const eventDataHost= await Event.findall({
+    include: [User,Guest,Menu],
+    host_user_id: req.params.host_id,
+    order: [['event_Date','ASC']],
+    });
+ const eventsHOST = eventDataHost.map((event) => event.get({plan:true}));
+
+
+   try {
+    res.render('homepage',{
+      eventsNEW,
+      eventsOLD,
+      eventsHOST
+      //logged_in: isLoggedIn
+    });
+
+   } catch (err) {
+    res.status(500).json(err);
+   }
+
+  });
+
+
 
 ///////////////////////// - Example of possible routers - need models and seed implementation to complete/////////////////////////////////
 // /**
