@@ -24,7 +24,7 @@ Allergy.init(
     },
     // Allergy product field
     allergy_product: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     }
   },
   {

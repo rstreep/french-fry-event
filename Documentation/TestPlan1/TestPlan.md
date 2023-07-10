@@ -20,9 +20,10 @@ The test plan covers the following areas:
 **Tools:** Jest (JavaScript testing framework).
 
 **Test Cases:**
+[Unit Tests](Documentation/TestPlan1/Unit%20Tests)
 - Test the `checkPassword` method in the User model to ensure it correctly compares passwords.
-- Validate the validation rules for fields such as `user_name`, `email`, `password`, and `zip`.
 - Verify the hooks in the User model to hash passwords before creating and updating users.
+- Validate each model structure and attributes
 
 **Expected Outcomes:** All models unit tests pass without errors.
 
@@ -47,6 +48,7 @@ The test plan covers the following areas:
 **Tools:** Insomnia (REST client for manual API testing).
 
 **Test Cases:**
+[Insomnia Tests](Documentation/Project2_Insomnia_APIContracts.json)
 - Manually test each API endpoint using different request methods (GET, POST, PUT, DELETE) and different request payloads.
 - Verify the response data and status codes for each request.
 - Test API endpoints with valid and invalid data to ensure proper validation and error handling.
