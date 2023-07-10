@@ -36,7 +36,6 @@ router.get('/map', (req, res) => {
   })
   console.log(user)
   res.render('map',{user});
-})
 });
 
 router.get('/create-event', async (req, res) => {
