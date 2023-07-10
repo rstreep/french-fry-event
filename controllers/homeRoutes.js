@@ -38,6 +38,16 @@ router.get('/create-event', async (req, res) => {
   // });
 });
 
+ res.render('login');
+
+
+router.get('/map', (req, res) => {
+res.render('map');
+})
+
+router.get('/preview', (req, res)=> {
+res.render('preview');
+});
 
 ///////////////////////// - Example of possible routers - need models and seed implementation to complete/////////////////////////////////
 // /**

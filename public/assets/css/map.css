@@ -1,52 +1,88 @@
 /* Developed by Alice */
 #map {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-  }
-  .formSection {
-    max-width: 300px;
-    background-color:aliceblue;
-    border:2px, solid black; 
-    position: absolute;
-    top: 10px;
-    left: 50px;
-    padding: 10px;
-    z-index: 10;
-    box-shadow:0 0 2px black;
+  height: 60vh; /* Set the height to 50% of the viewport height */
+  width: 100%;
+  position: relative;
+  top: 30%; /* Move the map down by 50% of the viewport height */
+  transform: translateY(100%); /* Adjust the vertical position to center the map */
   }
   
-  .container {
-      border: 2px solid black;
-  }
-  
-  
-  /* Create circles menu */
-  .step {
-      height: 15px;
-      width: 15px;
-      margin: 0px 35px;
-      background-color: #bbbbbb;
-      border: none;
-      border-radius: 50%;
-      display: inline-block;
-      opacity: 0.5;
+    .formSection {
+      max-width: 300px;
+      background-color:aliceblue;
+      border:2px, solid black; 
+      position: relative;
+      top: 10px;
+      left: 50px;
+      padding: 10px;
+      z-index: 10;
+      box-shadow:0 0 2px black;
     }
+  .eventCard {
+    width: 100vw;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  }
+  
+  .card {
+    width: 100vw;
+  margin-left: calc(50% - 17vw);
+  margin-right: calc(50% - 50vw);
+  }
     
-    /* Mark the active step: */
-  .step.active {
-      opacity: 1;
-    }
+    /* .container {
+        border: 2px solid black;
+        height: 50vh;
+        width: 100%;
+        position:relative;
+        top: 50%;
+        transform: translateY(50%);
+        
+    } */
     
-    /* Mark the steps that are finished and valid: */
-    .step.finish {
-      background-color: #04AA6D;
-    }
+    
+    /* Create circles menu */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0px 35px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+      }
+      
+      /* Mark the active step: */
+    .step.active {
+        opacity: 1;
+      }
+      
+      /* Mark the steps that are finished and valid: */
+      .step.finish {
+        background-color: #04AA6D;
+      }
+    
+      [data-state=hidden] {
+        display: none
+      }
+      [data-state=show] {
+        display: block;
+        top: 100px
+      }
   
-    [data-state=hidden] {
-      display: none
-    }
-    [data-state=show] {
-      display: block;
-      top: 100px
-    }
+      #coordinates {
+        position: relative;
+        height: 15%;
+        max-width: 200px;
+        top: 300px;
+        right: -80%;
+        background-color:aliceblue;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+  
+  
+        
