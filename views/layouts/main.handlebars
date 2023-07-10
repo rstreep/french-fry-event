@@ -9,7 +9,7 @@
   {{!--
   <link rel="stylesheet" href="/css/jass.css"> --}}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <link rel="stylesheet" href="./assets/css/style2.css" />
+  <link rel="stylesheet" href="/assets/css/style2.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="/assets/css/map.css" />
@@ -46,8 +46,12 @@
           margin-bottom: 20px;
         }
 
-        #nextBtn a{
+        #nextBtn a {
           color: white !important;
+        }
+
+        #save-guest-btn {
+          margin-top: 20px;
         }
 
         .hide {
@@ -64,6 +68,11 @@
           display: flex;
           justify-content: space-around;
           margin-top: 20px;
+        }
+
+        .cards-container .card {
+          width: 32%;
+          min-height: 350px;
         }
 
         .custom-card {
@@ -87,12 +96,6 @@
         }
       </style>
       <div class="navbar-fixed">
-        <ul id="dropdown1" class="dropdown-content">
-          <li><a href="#!">example</a></li>
-          <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li>
-        </ul>
         <nav>
           <div class="nav-wrapper red">
             <a href="#" class="brand-logo center">Family<span class="blue-text text-lighten-3"> ★ </span>Fiesta</a>
@@ -100,7 +103,8 @@
               <li><a href="/">Home</a></li>
               <!-- Conditionally render login or logout links -->
               {{#if logged_in}}
-              <li><a href="/profile">Dashboard</a></li>
+              <li><a href="/create-event">New Event</a></li>
+              <li><a href="/map">Event Details</a></li>
               {{!-- <li><a href="/">Log-out</a></li> --}}
               <button class="no-button" id="logout">logout</button>
               {{else}}
@@ -131,6 +135,15 @@
   {{/if}}
   {{!--
   <script src="/js/main.js"></script> --}}
+  <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdowns = document.querySelectorAll('.dropdown-trigger')
+      for (var i = 0; i < dropdowns.length; i++) {
+        M.Dropdown.init(dropdowns[i]);
+      }
+    });
+  </script>
 </body>
 
 </html>

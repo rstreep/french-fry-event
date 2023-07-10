@@ -7,18 +7,12 @@
 const router = require('express').Router();
 const {Event, User, Dish, Menu, Guest} = require('../models');
 const withAuth = require('../utils/auth');
-
-router.get('/', async (req, res) => {
-    // res.send('homeRoutes');
-    res.render('homepage', {
-      logged_in: req.session.logged_in 
-    });
-  });
+const { Op } = require("sequelize");
 
   router.get('/login', (req, res) => {
      // only for debugging  
    // res.send ('Login router!!!!');
-
+    console.log(req.session.logged_in);
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
       res.redirect('/');
@@ -32,14 +26,9 @@ router.get('/', async (req, res) => {
   //   res.render('map');
   // })
 router.get('/map', (req, res) => {
-  console.log(req.session.user_id)
-User.findOne({
-  where: {
-user_id: req.session.user_id
-  },
-  include: [{
-    model: Event
-  }]
+  res.render('map', {
+    logged_in: req.session.logged_in
+  });
 })
 .then(userData =>{
   const user = userData.get({
@@ -51,14 +40,23 @@ user_id: req.session.user_id
 });
 
 router.get('/create-event', async (req, res) => {
-  res.render('create-event');
+  res.render('create-event', {
+    logged_in: req.session.logged_in
+  });
   // res.render('homepage', {
   //   logged_in: req.session.logged_in 
   // });
 });
 
+
+// router.get('/map', (req, res) => {
+// res.render('map');
+// });
+
 router.get('/preview', (req, res)=> {
-res.render('preview');
+res.render('preview', {
+  logged_in: req.session.logged_in
+});
 });
 
 /** 
@@ -67,56 +65,66 @@ router.get('/user-profile', (req, res)=> {
 }); 
 */
   // Get Card Images
-  router.get('/', async (req, res) => {
-    let images=[
-      {
-        image: "/assets/images/pexels-fauxels-3184188.jpg"
-      },
-      {
-        image: "/assets/images/pexels-rachel-claire-4819705.jpg"
-      },
-      {
-        image: "/assets/images/pexels-rachel-claire-4819714.jpg"
-      }
-    ]
-    res.render('index' , {images});
-  });
-  
+  // router.get('/', async (req, res) => {
+  //   let images=[
+  //     {
+  //       image: "/assets/images/pexels-fauxels-3184188.jpg"
+  //     },
+  //     {
+  //       image: "/assets/images/pexels-rachel-claire-4819705.jpg"
+  //     },
+  //     {
+  //       image: "/assets/images/pexels-rachel-claire-4819714.jpg"
+  //     }
+  //   ]
+  //   res.render('index' , {images});
+  // });
+
   // Get New Events
   router.get('/', async (req, res) => {
-    const eventDataNew  = await Event.findall({
+    const eventDataNew  = await Event.findAll({
       limit: 3,
       include: [User, Guest, Menu],
       order: [['event_date','ASC']],
    });
    const eventsNEW = eventDataNew.map((event) => event.get({plan:true}));
- 
+   let images=[
+        {
+          image: "/assets/images/pexels-fauxels-3184188.jpg"
+        },
+        {
+          image: "/assets/images/pexels-rachel-claire-4819705.jpg"
+        },
+        {
+          image: "/assets/images/pexels-rachel-claire-4819714.jpg"
+        }
+      ]
    // Get Old Events
-   const eventDataOld = await Event.findall({
+   const eventDataOld = await Event.findAll({
       include: [User,Guest,Menu],
       where: { event_date: {
-        [Op.lt]: now.endOf('day').toString()
+        [Op.lt]: new Date().toString()
       }
      },
-      order: [['event_Date','ASC']],
+      order: [['event_date','ASC']],
    });
    const eventsOLD = eventDataOld.map((event) => event.get({plan:true}));
-
    // Get Events Where I am Host
-   const eventDataHost= await Event.findall({
+   const eventDataHost= await Event.findAll({
     include: [User,Guest,Menu],
     host_user_id: req.params.host_id,
-    order: [['event_Date','ASC']],
+    order: [['event_date','DESC']],
     });
  const eventsHOST = eventDataHost.map((event) => event.get({plan:true}));
 
-
+    console.log(images)
    try {
     res.render('homepage',{
       eventsNEW,
       eventsOLD,
-      eventsHOST
-      //logged_in: isLoggedIn
+      eventsHOST, 
+      images,
+      logged_in: req.session.logged_in 
     });
 
    } catch (err) {
